@@ -4,17 +4,21 @@ import Model.Vehicles.Vehicle;
 
 //Na kratce moze znajdowac sie pojazd
 
-class Cell {
+public class Cell {
 
     public enum CellType {
         EXIT, ENTRY, NORMAL, DISABLED
     }
 
-    protected boolean occupied;
-    protected Vehicle vehicle;
-    protected CellType cellType;
+    public boolean occupied;
+    public Vehicle vehicle;
+    public CellType cellType;
 
-    boolean getOccupied() {
+    public Cell(){
+        setOccupied(true);
+    }
+
+    public boolean getOccupied() {
         return occupied;
     }
 
@@ -22,7 +26,7 @@ class Cell {
         occupied = cellState;
     }
 
-    CellType getCellType() {
+    public CellType getCellType() {
         return cellType;
     }
 

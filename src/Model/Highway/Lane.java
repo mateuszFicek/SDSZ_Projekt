@@ -9,8 +9,8 @@ import Model.Highway.Cell.CellType;
 
 //Pas sklada sie z 8353 kratek
 
-class Lane {
-    protected Cell[] lane;
+public class Lane {
+    public Cell[] lane;
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
 
@@ -58,21 +58,34 @@ class Lane {
             PoludnieWyjazd, LagiewnikiWyjazd, WieliczkaWyjazd, BiezaznowWyjazd, PrzewozWyjazd, NowaHutaWyjazd,
             GrebalowWyjazd, MistrzejowiceWyjazd, WegrzceWyjazd, ZielonkiWyjazd, ModlnicaWyjazd, ModlniczkaWyjazd);
 
-    public Lane(int laneLength) {
-        lane = new Cell[laneLength];
+    public Lane() {
+        lane = new Cell[8353];
+        for(int i = 0; i < 8353; i++) lane[i] = new Cell();
     }
 
     // Ustawia typ kratki na wjazd;
-    // setupEntry dla jednej jezdni = setupExit dla drugiej jezdni
-    public void setupEntry() {
+    public void setupEntryOneWay() {
         for (Integer point : Entries) {
             lane[point].cellType = CellType.ENTRY;
         }
     }
 
     // Ustawia typ kratki na zjazd
-    public void setupExit() {
+    public void setupExitOneWay() {
         for (Integer point : Exits) {
+            lane[point].cellType = CellType.EXIT;
+        }
+    }
+
+    public void setupEntryOtherWay() {
+        for (Integer point : Exits) {
+            lane[point].cellType = CellType.ENTRY;
+        }
+    }
+
+    // Ustawia typ kratki na zjazd
+    public void setupExitOtherWay() {
+        for (Integer point : Entries) {
             lane[point].cellType = CellType.EXIT;
         }
     }
