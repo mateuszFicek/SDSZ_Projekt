@@ -10,6 +10,7 @@ public class Cell {
         EXIT, ENTRY, NORMAL, DISABLED
     }
 
+    public static double Measure= 7.5;
     public boolean occupied;
     public Vehicle vehicle;
     public CellType cellType;
