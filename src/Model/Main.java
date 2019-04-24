@@ -9,6 +9,5 @@ public class Main {
         Highway highway = new Highway(2);
         System.out.println(highway.highway[0].road[0].lane[870].getCellType());
         System.out.println(highway.highway[0].road[1].lane[70].getCellType());
-
     }
 }

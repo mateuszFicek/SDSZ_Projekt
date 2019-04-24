@@ -16,7 +16,7 @@ public class Cell {
     public CellType cellType;
 
     public Cell(){
-        setOccupied(true);
+        setOccupied(false);
     }
 
     public boolean getOccupied() {
