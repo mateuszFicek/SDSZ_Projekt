@@ -13,6 +13,7 @@ public class Lane {
     public Cell[] lane;
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
+    final int cellNumber = 8353;
 
     List<Integer> BaliceWjazd = IntStream.rangeClosed(0, 40).boxed().collect(Collectors.toList());
     List<Integer> Balice2Wjazd = IntStream.rangeClosed(192, 232).boxed().collect(Collectors.toList());
@@ -50,17 +51,17 @@ public class Lane {
     List<Integer> ModlnicaWyjazd = IntStream.rangeClosed(7506, 7546).boxed().collect(Collectors.toList());
     List<Integer> ModlniczkaWyjazd = IntStream.rangeClosed(7813, 7853).boxed().collect(Collectors.toList());
 
-    List<Integer> Entries = concatenate(BaliceWjazd, Balice2Wjazd, BielanyWjazd, TyniecWjazd, SkawinaWjazd,
+    List<Integer> Exits = concatenate(BaliceWjazd, Balice2Wjazd, BielanyWjazd, TyniecWjazd, SkawinaWjazd,
             PoludnieWjazd, LagiewnikiWjazd, WieliczkaWjazd, BiezaznowWjazd, PrzewozWjazd, NowaHutaWjazd, GrebalowWjazd,
             MistrzejowiceWjazd, WegrzceWjazd, ZielonkiWjazd, ModlnicaWjazd, ModlniczkaWjazd);
 
-    List<Integer> Exits = concatenate(BaliceWyjazd, Balice2Wyjazd, BielanyWyjazd, TyniecWyjazd, SkawinaWyjazd,
+    List<Integer> Entries = concatenate(BaliceWyjazd, Balice2Wyjazd, BielanyWyjazd, TyniecWyjazd, SkawinaWyjazd,
             PoludnieWyjazd, LagiewnikiWyjazd, WieliczkaWyjazd, BiezaznowWyjazd, PrzewozWyjazd, NowaHutaWyjazd,
             GrebalowWyjazd, MistrzejowiceWyjazd, WegrzceWyjazd, ZielonkiWyjazd, ModlnicaWyjazd, ModlniczkaWyjazd);
 
     public Lane() {
-        lane = new Cell[8353];
-        for(int i = 0; i < 8353; i++) lane[i] = new Cell();
+        lane = new Cell[cellNumber];
+        for(int i = 0; i < cellNumber; i++) lane[i] = new Cell();
     }
 
     // Ustawia typ kratki na wjazd;
@@ -87,6 +88,26 @@ public class Lane {
     public void setupExitOtherWay() {
         for (Integer point : Entries) {
             lane[point].cellType = CellType.EXIT;
+        }
+    }
+
+    public void setupDisabled(){
+        for(int i = 0; i < cellNumber; i++){
+            if(Entries.contains(i)){
+                continue;
+            }
+            else if(Exits.contains(i)){
+                continue;
+            }
+            else{
+                lane[i].cellType = CellType.DISABLED;
+            }
+        }
+    }
+
+    public void setupNormal(){
+        for(int i = 0; i < cellNumber; i++){
+            lane[i].cellType = CellType.NORMAL;
         }
     }
 
