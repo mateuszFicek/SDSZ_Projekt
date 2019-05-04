@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: rgb(255,255,255);" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenu">
+   <children>
+      <Label alignment="CENTER" prefHeight="85.0" prefWidth="1080.0" text="Symulacja ruchu na IV obwodnicy Krakowa" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="41.0" />
+         </font>
+      </Label>
+      <Button fx:id="startButton" layoutX="493.0" layoutY="430.0" mnemonicParsing="false" onAction="#changeSceneToSimulation" prefHeight="57.0" prefWidth="94.0" text="Start" />
+      <Button fx:id="settingsButton" layoutX="493.0" layoutY="523.0" mnemonicParsing="false" onAction="#changeSceneToSettings" prefHeight="57.0" prefWidth="94.0" text="Opcje" />
+      <ImageView fitHeight="313.0" fitWidth="500.0" layoutX="298.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@IVObwodncia.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
