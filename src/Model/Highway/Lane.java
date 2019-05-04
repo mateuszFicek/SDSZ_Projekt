@@ -134,11 +134,14 @@ public class Lane {
     public void MoveVehiclesForward()
     {
         Cell[] nextFrameLane = new Cell[cellNumber];
+        for(int i = 0; i < cellNumber; i++) nextFrameLane[i] = new Cell();
+
         for(int i=0; i<lane.length; i++)
         {
             if(lane[i].occupied)
             {
                 Vehicle currentCellVehicle = lane[i].vehicle;
+//                System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity());
                 if(currentCellVehicle.getVelocity() + i >= lane.length)
                 {
                     nextFrameLane[(currentCellVehicle.getVelocity() +i)- lane.length].OccupyCell(currentCellVehicle);
