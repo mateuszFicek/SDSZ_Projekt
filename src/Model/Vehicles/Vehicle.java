@@ -1,6 +1,8 @@
 package Model.Vehicles;
 import Model.Highway.Cell;
 
+import java.util.Random;
+
 public class Vehicle {
     protected int velocity;
     public Cell[][] neighbourhood;
@@ -46,7 +48,7 @@ public class Vehicle {
 
     public void calculateNextVelocity()
     {
-        double probability = Math.random();
+        double probability = new Random().nextDouble();
         calculateDistanceToNextFrontVehicle();
 //        System.out.println("---" + distanceToNextCarInFront + "---");
         if(distanceToNextCarInFront <= velocity || probability < 0.1){
