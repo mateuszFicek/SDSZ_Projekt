@@ -133,6 +133,7 @@ public class Lane {
 
     public void MoveVehiclesForward()
     {
+        Cell[] nextFrameLane = new Cell[cellNumber];
         for(int i=0; i<lane.length; i++)
         {
             if(lane[i].occupied)
@@ -140,15 +141,14 @@ public class Lane {
                 Vehicle currentCellVehicle = lane[i].vehicle;
                 if(currentCellVehicle.getVelocity() + i >= lane.length)
                 {
-                    lane[(currentCellVehicle.getVelocity() +i)- lane.length].OccupyCell(currentCellVehicle);
-                    lane[i].FreeCell();
+                    nextFrameLane[(currentCellVehicle.getVelocity() +i)- lane.length].OccupyCell(currentCellVehicle);
                 }
                 else{
-                    lane[i+currentCellVehicle.getVelocity()].OccupyCell(currentCellVehicle);
-                    lane[i].FreeCell();
+                    nextFrameLane[i+currentCellVehicle.getVelocity()].OccupyCell(currentCellVehicle);
                 }
             }
         }
+        lane = nextFrameLane;
     }
 
 }
