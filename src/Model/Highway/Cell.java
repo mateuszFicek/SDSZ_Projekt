@@ -35,4 +35,16 @@ public class Cell {
         cellType = type;
     }
 
+    public void OccupyCell(Vehicle vehicleToSet)
+    {
+        occupied = true;
+        vehicle = vehicleToSet;
+    }
+
+    public void FreeCell()
+    {
+        occupied = false;
+        vehicle = null;
+    }
+
 }

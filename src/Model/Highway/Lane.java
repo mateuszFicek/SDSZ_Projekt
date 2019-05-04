@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import Model.Highway.Cell.CellType;
+import Model.Vehicles.Vehicle;
 
 //Pas sklada sie z 8353 kratek
 
@@ -118,6 +119,36 @@ public class Lane {
             result.addAll(l);
 
         return result;
+    }
+
+    public void CalculateNextFrame()
+    {
+        for (Cell cell: lane) {
+            if(cell.occupied)
+            {
+                cell.vehicle.calculateNextVelocity();
+            }
+        }
+    }
+
+    public void MoveVehiclesForward()
+    {
+        for(int i=0; i<lane.length; i++)
+        {
+            if(lane[i].occupied)
+            {
+                Vehicle currentCellVehicle = lane[i].vehicle;
+                if(currentCellVehicle.getVelocity() + i >= lane.length)
+                {
+                    lane[(currentCellVehicle.getVelocity() +i)- lane.length].OccupyCell(currentCellVehicle);
+                    lane[i].FreeCell();
+                }
+                else{
+                    lane[i+currentCellVehicle.getVelocity()].OccupyCell(currentCellVehicle);
+                    lane[i].FreeCell();
+                }
+            }
+        }
     }
 
 }

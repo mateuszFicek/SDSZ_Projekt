@@ -17,6 +17,8 @@ public class Vehicle {
         Velocity+=VelocityChange;
     }
 
+    public int getVelocity() {return Velocity;}
+
     public void calculateDistanceToNextFrontVehicle()
     {
         for(int i = (Neighbourhood[1].length/2)+1, j= 1; i<Neighbourhood[1].length;i++)
@@ -34,11 +36,11 @@ public class Vehicle {
 
     public void calculateNextVelocity()
     {
+        double probability = Math.random();
         calculateDistanceToNextFrontVehicle();
-        if(DistanceToNextCarInFront<= 1){
+        if(DistanceToNextCarInFront<= 1 || probability < 0.1){
             SlowDown();
-        }
-        else{
+        } else{
             SpeedUp();
         }
     }
