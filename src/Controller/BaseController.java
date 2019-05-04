@@ -21,7 +21,7 @@ public class BaseController {
         window.setScene(mainMenuScene);
 
 
-        MainMenu mainMenuController = loader.getController();
+        MainMenuController mainMenuController = loader.getController();
 
         window.show();
     }
