@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: rgb(255,255,255);" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenu">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: rgb(255,255,255);" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
    <children>
       <Label alignment="CENTER" prefHeight="85.0" prefWidth="1080.0" text="Symulacja ruchu na IV obwodnicy Krakowa" textAlignment="CENTER">
          <font>
