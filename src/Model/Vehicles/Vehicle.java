@@ -2,30 +2,40 @@ package Model.Vehicles;
 import Model.Highway.Cell;
 
 public class Vehicle {
-    protected int Velocity;
-    public Cell[][] Neighbourhood = new Cell[3][11];
-    protected int MaxVelocity;
-    protected int DistanceToNextCarInFront=0;
+    protected int velocity;
+    public Cell[][] neighbourhood;
+    protected int maxVelocity;
+    protected int distanceToNextCarInFront =0;
 
-    public void decreaseVelocity(int VelocityChange)
-    {
-        Velocity-=VelocityChange;
+    public Vehicle(){
+        neighbourhood = new Cell[3][11];
+        for(int i = 0; i < neighbourhood.length; ++i){
+            for(int j = 0; j < neighbourhood[i].length; ++j){
+                neighbourhood[i][j] = new Cell();
+            }
+        }
+
     }
 
-    public void increaseVelocity(int VelocityChange)
+    public void decreaseVelocity(int velocityChange)
     {
-        Velocity+=VelocityChange;
+        velocity -=velocityChange;
     }
 
-    public int getVelocity() {return Velocity;}
+    public void increaseVelocity(int velocityChange)
+    {
+        velocity +=velocityChange;
+    }
+
+    public int getVelocity() {return velocity;}
 
     public void calculateDistanceToNextFrontVehicle()
     {
-        for(int i = (Neighbourhood[1].length/2)+1, j= 1; i<Neighbourhood[1].length;i++)
+        for(int i = (neighbourhood[1].length/2)+1, j = 1; i< neighbourhood[1].length; i++)
         {
-            if(!Neighbourhood[1][i].occupied)
+            if(!neighbourhood[1][i].occupied)
             {
-                DistanceToNextCarInFront = j;
+                distanceToNextCarInFront = j;
                 j++;
             }
             else{
@@ -38,21 +48,22 @@ public class Vehicle {
     {
         double probability = Math.random();
         calculateDistanceToNextFrontVehicle();
-        if(DistanceToNextCarInFront<= 1 || probability < 0.1){
+//        System.out.println("---" + distanceToNextCarInFront + "---");
+        if(distanceToNextCarInFront <= velocity || probability < 0.1){
             SlowDown();
-        } else{
+        } else if(probability >= 0.7){
             SpeedUp();
         }
     }
 
     private void SpeedUp()
     {
-            Velocity = Math.min(Velocity+1, MaxVelocity);
+            velocity = Math.min(velocity +1, maxVelocity);
     }
 
     private void SlowDown()
     {
-            Velocity = Math.min(Velocity, DistanceToNextCarInFront-1);
+            velocity = Math.min(velocity, distanceToNextCarInFront -1);
     }
 
 

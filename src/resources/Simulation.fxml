@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Simulation">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SimulationController">
    <children>
       <Button fx:id="backButton" layoutX="14.0" layoutY="706.0" mnemonicParsing="false" onAction="#goBackToMenu" prefHeight="48.0" prefWidth="95.0" text="Wyjście" />
       <Label fx:id="simLabel" layoutX="498.0" layoutY="345.0" text="Label" />
