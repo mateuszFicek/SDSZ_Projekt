@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainMenu extends BaseController{
+public class MainMenu extends BaseController {
     public Button startButton;
     public Button settingsButton;
 
@@ -26,6 +26,7 @@ public class MainMenu extends BaseController{
         Simulation simulationController = loader.getController();
 
         window.show();
+        simulationController.h.start();
     }
 
     public void changeSceneToSettings(ActionEvent event) throws IOException {
