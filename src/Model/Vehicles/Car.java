@@ -1,9 +1,9 @@
 package Model.Vehicles;
 
 public class Car extends Vehicle {
-    public Car(){
+    public Car() {
         super();
-        super.maxVelocity = 5;
-        super.velocity =2;
+        maxVelocity = 5;
+        velocity = 2;
     }
 }

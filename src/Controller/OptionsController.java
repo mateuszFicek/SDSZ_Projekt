@@ -9,9 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class OptionsController extends BaseController{
+public class OptionsController extends BaseController {
     public Button backButton;
-
 
 
 }

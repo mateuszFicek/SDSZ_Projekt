@@ -121,7 +121,7 @@ public class Lane {
         return result;
     }
 
-    public void CalculateNextFrame()
+    public void calculateNextFrame()
     {
         for (Cell cell: lane) {
             if(cell.occupied)
@@ -131,7 +131,7 @@ public class Lane {
         }
     }
 
-    public void MoveVehiclesForward()
+    public void moveVehiclesForward()
     {
         Cell[] nextFrameLane = new Cell[cellNumber];
         for(int i = 0; i < cellNumber; i++) nextFrameLane[i] = new Cell();
@@ -141,13 +141,13 @@ public class Lane {
             if(lane[i].occupied)
             {
                 Vehicle currentCellVehicle = lane[i].vehicle;
-//                System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity());
+                System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity());
                 if(currentCellVehicle.getVelocity() + i >= lane.length)
                 {
-                    nextFrameLane[(currentCellVehicle.getVelocity() +i)- lane.length].OccupyCell(currentCellVehicle);
+                    nextFrameLane[(currentCellVehicle.getVelocity() +i)- lane.length].occupyCell(currentCellVehicle);
                 }
                 else{
-                    nextFrameLane[i+currentCellVehicle.getVelocity()].OccupyCell(currentCellVehicle);
+                    nextFrameLane[i+currentCellVehicle.getVelocity()].occupyCell(currentCellVehicle);
                 }
             }
         }
