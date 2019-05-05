@@ -26,8 +26,8 @@ public class SimulationController extends BaseController implements Initializabl
         @Override
         public void handle(long now) {
             if (i % 60 == 0) {
-                for(Road r: simulation.getHighway().roads){
-                    r.GenerateNextFrame();
+                for (Road r : simulation.getHighway().roads) {
+                    r.generateNextFrame();
                 }
             }
             i += 1;

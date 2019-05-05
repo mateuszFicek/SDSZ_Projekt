@@ -10,12 +10,12 @@ public class Cell {
         EXIT, ENTRY, NORMAL, DISABLED
     }
 
-    public static double Measure= 7.5;
+    public static double measure = 7.5;
     public boolean occupied;
     public Vehicle vehicle;
     public CellType cellType;
 
-    public Cell(){
+    public Cell() {
         setOccupied(false);
     }
 
@@ -35,14 +35,12 @@ public class Cell {
         cellType = type;
     }
 
-    public void OccupyCell(Vehicle vehicleToSet)
-    {
+    public void occupyCell(Vehicle vehicleToSet) {
         occupied = true;
         vehicle = vehicleToSet;
     }
 
-    public void FreeCell()
-    {
+    public void freeCell() {
         occupied = false;
         vehicle = null;
     }

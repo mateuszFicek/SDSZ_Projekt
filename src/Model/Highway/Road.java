@@ -13,17 +13,17 @@ public class Road {
         for (int i = 0; i < roadWidth; i++) road[i] = new Lane();
     }
 
-    public void GenerateNextFrame() {
+    public void generateNextFrame() {
         for (int index = 0; index < road.length; index++) {
-            road[index].CalculateNextFrame();
-            road[index].MoveVehiclesForward();
-            MoveCarsNeighbourhoods(index);
+            road[index].calculateNextFrame();
+            road[index].moveVehiclesForward();
+            moveCarsNeighbourhoods(index);
         }
     }
 
-    public void MoveCarsNeighbourhoods(int laneIndex) {
-        int LaneLength = road[laneIndex].lane.length;
-        for (int i = 0; i < LaneLength; i++) {
+    public void moveCarsNeighbourhoods(int laneIndex) {
+        int laneLength = road[laneIndex].lane.length;
+        for (int i = 0; i < laneLength; i++) {
             if (road[laneIndex].lane[i].occupied) {
                 Vehicle currentCellVehicle = road[laneIndex].lane[i].vehicle;
                 if (laneIndex - 1 >= 0) {
@@ -32,12 +32,12 @@ public class Road {
                         if (i - j >= 0) {
                             currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[i - j];
                         } else {
-                            currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[LaneLength - j];
+                            currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[laneLength - j];
                         }
-                        if (i + j < LaneLength) {
+                        if (i + j < laneLength) {
                             currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[i + 1];
                         } else {
-                            currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[(i + j) - LaneLength];
+                            currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[(i + j) - laneLength];
                         }
                     }
                 }
@@ -47,12 +47,12 @@ public class Road {
                         if (i - j >= 0) {
                             currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[i - j];
                         } else {
-                            currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[LaneLength - j];
+                            currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[laneLength - j];
                         }
-                        if (i + j < LaneLength) {
+                        if (i + j < laneLength) {
                             currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[i + 1];
                         } else {
-                            currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[(i + j) - LaneLength];
+                            currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[(i + j) - laneLength];
                         }
                     }
                 }
