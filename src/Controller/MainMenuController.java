@@ -1,15 +1,19 @@
 package Controller;
 
+import Model.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainMenuController extends BaseController {
+public class MainMenuController extends BaseController implements Initializable {
     public Button startButton;
     public Button settingsButton;
 
@@ -24,6 +28,8 @@ public class MainMenuController extends BaseController {
 
 
         SimulationController simulationController = loader.getController();
+        simulationController.initSettings(super.settings);
+        simulationController.initSimulation();
 
         window.show();
         simulationController.h.start();
@@ -40,7 +46,22 @@ public class MainMenuController extends BaseController {
 
 
         OptionsController optionsController = loader.getController();
-
+        optionsController.initSettings(super.settings);
+        optionsController.initTime();
         window.show();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (!Settings.initialized){
+            settings = new Settings();
+            Settings.initialized = true;
+        }
+
+    }
+
+    protected void initSettings(Settings settings) {
+        this.settings = settings;
+        System.out.println(settings.getTime());
     }
 }
