@@ -70,6 +70,7 @@ public class Road {
                         currentCellVehicle.neighbourhood[1][5 + j] = road[laneIndex].lane[(i + j) - LaneLength];
                     }
                 }
+                currentCellVehicle.calculateDistanceToNextFrontVehicle();
             }
         }
     }

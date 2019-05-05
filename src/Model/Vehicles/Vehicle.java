@@ -35,12 +35,14 @@ public class Vehicle {
     {
         for(int i = (neighbourhood[1].length/2)+1, j = 1; i< neighbourhood[1].length; i++)
         {
+//            System.out.println(i);
             if(!neighbourhood[1][i].occupied)
             {
                 distanceToNextCarInFront = j;
                 j++;
             }
             else{
+                distanceToNextCarInFront = j;
                 break;
             }
         }
@@ -50,7 +52,7 @@ public class Vehicle {
     {
         double probability = new Random().nextDouble();
         calculateDistanceToNextFrontVehicle();
-//        System.out.println("---" + distanceToNextCarInFront + "---");
+        System.out.println("---" + distanceToNextCarInFront + "---");
         if(distanceToNextCarInFront <= velocity || probability < 0.1){
             SlowDown();
         } else if(probability >= 0.7){
