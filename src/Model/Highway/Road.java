@@ -62,12 +62,12 @@ public class Road {
                     if (i - j >= 0) {
                         currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex].lane[i - j];
                     } else {
-                        currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex].lane[LaneLength - j];
+                        currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex].lane[laneLength - j];
                     }
-                    if (i + j < LaneLength) {
-                        currentCellVehicle.neighbourhood[1][5 + j] = road[laneIndex].lane[i + 1];
+                    if (i + j < laneLength) {
+                        currentCellVehicle.neighbourhood[1][5 + j] = road[laneIndex].lane[i + j];
                     } else {
-                        currentCellVehicle.neighbourhood[1][5 + j] = road[laneIndex].lane[(i + j) - LaneLength];
+                        currentCellVehicle.neighbourhood[1][5 + j] = road[laneIndex].lane[(i + j) - laneLength];
                     }
                 }
                 currentCellVehicle.calculateDistanceToNextFrontVehicle();
