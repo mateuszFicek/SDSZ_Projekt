@@ -63,6 +63,11 @@ public class Vehicle {
     }
 
     public void decideAboutLaneChange(LaneToChange directionToChange) {
+        calculateDistanceToNextFrontVehicle();
+        if(distanceToNextCarInFront >velocity){
+            laneToChange = LaneToChange.NONE;
+            return;
+        }
         Vehicle vehicleBehind = null;
         int whereToChange =0;
         switch (directionToChange) {
@@ -101,21 +106,12 @@ public class Vehicle {
         laneToChange = LaneToChange.NONE;
     }
 
-    public void calculateNextState() {
+    public void calculateNextVelocity() {
         double probability = new Random().nextDouble();
         calculateDistanceToNextFrontVehicle();
         System.out.println("---" + distanceToNextCarInFront + "---" + probability);
         if (distanceToNextCarInFront <= velocity || (probability < 0.1 && velocity == 5)) {
-                if(neighbourhood[0]== null)
-                {
-                    decideAboutLaneChange(LaneToChange.RIGHT);
-                } else {
-                    decideAboutLaneChange(LaneToChange.LEFT);
-                }
-                if(laneToChange == LaneToChange.NONE)
-                {
                     SlowDown();
-                }
         }
             else if (probability >= 0.7 || velocity <= 3) {
             SpeedUp();

@@ -5,6 +5,8 @@ package Model.Highway;
 
 import Model.Vehicles.Vehicle;
 
+import java.util.Map;
+
 public class Road {
     public Lane[] road;
 
@@ -15,6 +17,8 @@ public class Road {
 
     public void generateNextFrame() {
         for (int index = 0; index < road.length; index++) {
+            road[index].calculateNextFrame();
+            moveCarsLanes(index);
             road[index].calculateNextFrame();
             road[index].moveVehiclesForward();
             moveCarsNeighbourhoods(index);
@@ -75,5 +79,19 @@ public class Road {
         }
     }
 
+    public void moveCarsLanes(int LaneIndex){
+        for (Map.Entry<Integer, Cell> entry : road[LaneIndex].cellsToMoveRight.entrySet())
+        {
+            Vehicle currentCellVehicle = entry.getValue().vehicle;
+            entry.getValue().freeCell();
+            road[LaneIndex+1].lane[entry.getKey()].occupyCell(currentCellVehicle);
+        }
+        for (Map.Entry<Integer, Cell> entry : road[LaneIndex].cellsToMoveLeft.entrySet())
+        {
+            Vehicle currentCellVehicle = entry.getValue().vehicle;
+            entry.getValue().freeCell();
+            road[LaneIndex-1].lane[entry.getKey()].occupyCell(currentCellVehicle);
+        }
+    }
 
 }

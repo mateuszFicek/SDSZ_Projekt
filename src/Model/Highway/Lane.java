@@ -1,11 +1,14 @@
 package Model.Highway;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import Model.Highway.Cell.CellType;
+import Model.Vehicles.LaneToChange;
 import Model.Vehicles.Vehicle;
 
 //Pas sklada sie z 8353 kratek
@@ -15,6 +18,8 @@ public class Lane {
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
     final int cellNumber = 8353;
+    Map<Integer,Cell> cellsToMoveLeft;
+    Map<Integer,Cell> cellsToMoveRight;
 
     List<Integer> BaliceWjazd = IntStream.rangeClosed(0, 40).boxed().collect(Collectors.toList());
     List<Integer> Balice2Wjazd = IntStream.rangeClosed(192, 232).boxed().collect(Collectors.toList());
@@ -123,10 +128,20 @@ public class Lane {
 
     public void calculateNextFrame()
     {
-        for (Cell cell: lane) {
-            if(cell.occupied)
+       cellsToMoveLeft = new HashMap<>();
+       cellsToMoveRight = new HashMap<>();
+        for (int i=0; i<lane.length; i++) {
+            if(lane[i].occupied)
             {
-                cell.vehicle.calculateNextVelocity();
+                if(lane[i].vehicle.laneToChange == LaneToChange.LEFT)
+                {
+                    cellsToMoveLeft.put(i,lane[i]);
+                }
+                else if(lane[i].vehicle.laneToChange == LaneToChange.RIGHT)
+                {
+                    cellsToMoveRight.put(i,lane[i]);
+                }
+                lane[i].vehicle.calculateNextVelocity();
             }
         }
     }
