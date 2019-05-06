@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Highway.Road;
+import Model.Settings;
 import Model.Simulation;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -18,7 +19,7 @@ public class SimulationController extends BaseController implements Initializabl
     public Label simLabel;
     public Button magicStartButton;
 
-    public Simulation simulation = new Simulation();
+    public Simulation simulation;
 
     AnimationTimer h = new AnimationTimer() {
         int i = 0;
@@ -33,6 +34,16 @@ public class SimulationController extends BaseController implements Initializabl
             i += 1;
         }
     };
+
+    @Override
+    protected void initSettings(Settings settings) {
+        this.settings = settings;
+        System.out.println(this.settings);
+    }
+
+    protected void initSimulation(){
+        this.simulation = new Simulation(settings);
+    }
 
     @Override
     public void goBackToMenu(ActionEvent event) throws IOException {
