@@ -34,10 +34,13 @@ public class Simulation {
         switch (settings.getTime()){
             case 0:
                 startingNumberOfCars = 200;
+                break;
             case 1:
                 startingNumberOfCars = 400;
+                break;
             case 2:
                 startingNumberOfCars = 600;
+                break;
         }
 
         for(int i = 0; i < startingNumberOfCars; ++i){
