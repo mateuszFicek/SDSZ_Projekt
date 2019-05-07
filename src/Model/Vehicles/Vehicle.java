@@ -64,22 +64,22 @@ public class Vehicle {
 
     public void decideAboutLaneChange(LaneToChange directionToChange) {
         calculateDistanceToNextFrontVehicle();
-        if(distanceToNextCarInFront >velocity){
+        if (distanceToNextCarInFront > velocity) {
             laneToChange = LaneToChange.NONE;
             return;
         }
         Vehicle vehicleBehind = null;
-        int whereToChange =0;
+        int whereToChange = 0;
         switch (directionToChange) {
             case LEFT:
-                whereToChange=0;
+                whereToChange = 0;
                 break;
             case RIGHT:
-                whereToChange=2;
+                whereToChange = 2;
                 break;
         }
-        if(neighbourhood[whereToChange] != null) {
-            for (int i = (neighbourhood[whereToChange].length / 2) + 1, j = 1; i < neighbourhood[whereToChange].length; i--) {
+        if (neighbourhood[whereToChange] != null) {
+            for (int i = (neighbourhood[whereToChange].length / 2) , j = 1; i >= 0; i--) {
                 if (!neighbourhood[whereToChange][i].occupied) {
                     distanceToNextCarInBack = j;
                     j++;
@@ -109,11 +109,17 @@ public class Vehicle {
     public void calculateNextVelocity() {
         double probability = new Random().nextDouble();
         calculateDistanceToNextFrontVehicle();
-        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
+//        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
         if (distanceToNextCarInFront <= velocity || (probability < 0.1 && velocity == 5)) {
-                    SlowDown();
-        }
-            else if (probability >= 0.7 || velocity <= 3) {
+            if (neighbourhood[0][5] != null) {
+                decideAboutLaneChange(LaneToChange.LEFT);
+            }
+            if (laneToChange == LaneToChange.NONE) {
+                SlowDown();
+            }
+
+
+        } else if (probability >= 0.7 || velocity <= 3) {
             SpeedUp();
         }
     }
