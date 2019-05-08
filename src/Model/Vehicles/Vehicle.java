@@ -79,7 +79,7 @@ public class Vehicle {
                 break;
         }
         if(neighbourhood[whereToChange] != null) {
-            for (int i = (neighbourhood[whereToChange].length / 2) + 1, j = 1; i < neighbourhood[whereToChange].length; i--) {
+            for (int i = (neighbourhood[whereToChange].length / 2) + 1, j = 1; i>=0; i--) {
                 if (!neighbourhood[whereToChange][i].occupied) {
                     distanceToNextCarInBack = j;
                     j++;
@@ -90,20 +90,42 @@ public class Vehicle {
                 }
             }
 
-            distanceToNextCarInBack += 1;
-            if (vehicleBehind != null) {
-                double probability = new Random().nextDouble();
-                if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
-                    laneToChange = directionToChange;
-                    return;
-                } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.9) {
+            double probability = new Random().nextDouble();
+
+            if(distanceToNextCarInFront<velocity) {
+                if (vehicleBehind != null) {
+                    if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
+                        laneToChange = directionToChange;
+                        return;
+                    } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.9) {
+                        laneToChange = directionToChange;
+                        return;
+                    }
+                } else
+                {
                     laneToChange = directionToChange;
                     return;
                 }
-
             }
+
         }
         laneToChange = LaneToChange.NONE;
+    }
+
+    public void changeLane()
+    {
+        if(laneToChange == LaneToChange.LEFT)
+        {
+            neighbourhood[0][5].occupyCell(this);
+            neighbourhood[1][5].freeCell();
+
+
+        }
+        else if(laneToChange == LaneToChange.RIGHT)
+        {
+            neighbourhood[1][5].freeCell();
+            neighbourhood[2][5].occupyCell(this);
+        }
     }
 
     public void calculateNextVelocity() {

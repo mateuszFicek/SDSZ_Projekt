@@ -18,8 +18,6 @@ public class Lane {
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
     final int cellNumber = 8353;
-    Map<Integer,Cell> cellsToMoveLeft;
-    Map<Integer,Cell> cellsToMoveRight;
 
     List<Integer> BaliceWjazd = IntStream.rangeClosed(0, 40).boxed().collect(Collectors.toList());
     List<Integer> Balice2Wjazd = IntStream.rangeClosed(192, 232).boxed().collect(Collectors.toList());
@@ -128,20 +126,14 @@ public class Lane {
 
     public void calculateNextFrame()
     {
-       cellsToMoveLeft = new HashMap<>();
-       cellsToMoveRight = new HashMap<>();
         for (int i=0; i<lane.length; i++) {
             if(lane[i].occupied)
             {
-                if(lane[i].vehicle.laneToChange == LaneToChange.LEFT)
-                {
-                    cellsToMoveLeft.put(i,lane[i]);
-                }
-                else if(lane[i].vehicle.laneToChange == LaneToChange.RIGHT)
-                {
-                    cellsToMoveRight.put(i,lane[i]);
-                }
-                lane[i].vehicle.calculateNextVelocity();
+                Vehicle currentCar = lane[i].vehicle;
+                currentCar.decideAboutLaneChange(LaneToChange.LEFT);
+                currentCar.changeLane();
+                currentCar.laneToChange = LaneToChange.NONE;
+                currentCar.calculateNextVelocity();
             }
         }
     }
