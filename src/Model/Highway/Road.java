@@ -39,7 +39,11 @@ public class Road {
                         if (i - j >= 0) {
                             currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[i - j];
                         } else {
-                            currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[laneLength - j + 1];
+                            if (i < 5) {
+                                currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[laneLength - j];
+                            } else {
+                                currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[laneLength - j + 1];
+                            }
                         }
                         if (i + j < laneLength) {
                             currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[i + j];
@@ -47,8 +51,7 @@ public class Road {
                             currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[(i + j) - laneLength];
                         }
                     }
-                } else
-                {
+                } else {
                     currentCellVehicle.neighbourhood[0] = null;
                 }
                 if (laneIndex + 1 < road.length) {
@@ -57,24 +60,32 @@ public class Road {
                         if (i - j >= 0) {
                             currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[i - j];
                         } else {
-                            currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[laneLength - j + 1];
-                        }
+                            if (i < 5) {
+                                currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex - 1].lane[laneLength - j];
+                            } else {
+                                currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex - 1].lane[laneLength - j + 1];
+                            }                        }
                         if (i + j < laneLength) {
                             currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[i + j];
                         } else {
                             currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[(i + j) - laneLength];
                         }
                     }
-                } else
-                {
+                } else {
                     currentCellVehicle.neighbourhood[2] = null;
                 }
-                currentCellVehicle.neighbourhood[1][5] = road[laneIndex].lane[i];
+                if(laneIndex == 1) { //dodany if, bo chyba tylko wtedy ma sie ustawiac???
+                    currentCellVehicle.neighbourhood[1][5] = road[laneIndex].lane[i];
+                }
                 for (int j = 1; j < 5; j++) {
                     if (i - j >= 0) {
                         currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex].lane[i - j];
                     } else {
-                        currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex].lane[laneLength - j +1];
+                        if (i < 5) {
+                            currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex - 1].lane[laneLength - j];
+                        } else {
+                            currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex - 1].lane[laneLength - j + 1];
+                        }
                     }
                     if (i + j < laneLength) {
                         currentCellVehicle.neighbourhood[1][5 + j] = road[laneIndex].lane[i + j];
