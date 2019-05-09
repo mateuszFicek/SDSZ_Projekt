@@ -64,22 +64,22 @@ public class Vehicle {
 
     public void decideAboutLaneChange(LaneToChange directionToChange) {
         calculateDistanceToNextFrontVehicle();
-        if (distanceToNextCarInFront > velocity) {
+        if(distanceToNextCarInFront >velocity){
             laneToChange = LaneToChange.NONE;
             return;
         }
         Vehicle vehicleBehind = null;
-        int whereToChange = 0;
+        int whereToChange =0;
         switch (directionToChange) {
             case LEFT:
-                whereToChange = 0;
+                whereToChange=0;
                 break;
             case RIGHT:
-                whereToChange = 2;
+                whereToChange=2;
                 break;
         }
-        if (neighbourhood[whereToChange] != null) {
-            for (int i = (neighbourhood[whereToChange].length / 2) , j = 1; i >= 0; i--) {
+        if(neighbourhood[whereToChange] != null) {
+            for (int i = (neighbourhood[whereToChange].length / 2) + 1, j = 1; i>=0; i--) {
                 if (!neighbourhood[whereToChange][i].occupied) {
                     distanceToNextCarInBack = j;
                     j++;
@@ -90,18 +90,24 @@ public class Vehicle {
                 }
             }
 
-            distanceToNextCarInBack += 1;
-            if (vehicleBehind != null) {
-                double probability = new Random().nextDouble();
-                if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
-                    laneToChange = directionToChange;
-                    return;
-                } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.9) {
+            double probability = new Random().nextDouble();
+
+            if(distanceToNextCarInFront<velocity) {
+                if (vehicleBehind != null) {
+                    if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
+                        laneToChange = directionToChange;
+                        return;
+                    } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.9) {
+                        laneToChange = directionToChange;
+                        return;
+                    }
+                } else
+                {
                     laneToChange = directionToChange;
                     return;
                 }
-
             }
+
         }
         laneToChange = LaneToChange.NONE;
     }
@@ -121,6 +127,24 @@ public class Vehicle {
 
         } else if (probability >= 0.7 || velocity <= 3) {
             SpeedUp();
+        }
+    }
+
+    public void changeLane()
+    {
+        if(laneToChange == LaneToChange.LEFT)
+        {
+            neighbourhood[0][5].occupyCell(this);
+            neighbourhood[1][5].freeCell();
+            laneToChange = LaneToChange.NONE;
+
+
+        }
+        else if(laneToChange == LaneToChange.RIGHT)
+        {
+            neighbourhood[1][5].freeCell();
+            neighbourhood[2][5].occupyCell(this);
+            laneToChange = LaneToChange.NONE;
         }
     }
 
