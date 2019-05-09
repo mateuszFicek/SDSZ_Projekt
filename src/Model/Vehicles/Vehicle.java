@@ -112,21 +112,6 @@ public class Vehicle {
         laneToChange = LaneToChange.NONE;
     }
 
-    public void changeLane()
-    {
-        if(laneToChange == LaneToChange.LEFT)
-        {
-            neighbourhood[0][5].occupyCell(this);
-            neighbourhood[1][5].freeCell();
-
-
-        }
-        else if(laneToChange == LaneToChange.RIGHT)
-        {
-            neighbourhood[1][5].freeCell();
-            neighbourhood[2][5].occupyCell(this);
-        }
-    }
 
     public void calculateNextVelocity() {
         double probability = new Random().nextDouble();
