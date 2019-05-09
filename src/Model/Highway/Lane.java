@@ -1,9 +1,7 @@
 package Model.Highway;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,10 +12,13 @@ import Model.Vehicles.Vehicle;
 //Pas sklada sie z 8353 kratek
 
 public class Lane {
+    int laneNumber;
+    int numberOfCarsOnLane;
     public Cell[] lane;
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
     final int cellNumber = 8353;
+
 
     List<Integer> BaliceWjazd = IntStream.rangeClosed(0, 40).boxed().collect(Collectors.toList());
     List<Integer> Balice2Wjazd = IntStream.rangeClosed(192, 232).boxed().collect(Collectors.toList());
@@ -66,6 +67,12 @@ public class Lane {
     public Lane() {
         lane = new Cell[cellNumber];
         for(int i = 0; i < cellNumber; i++) lane[i] = new Cell();
+    }
+
+    public Lane(int index){
+        lane = new Cell[cellNumber];
+        for(int i = 0; i < cellNumber; i++) lane[i] = new Cell();
+        this.laneNumber = index;
     }
 
     // Ustawia typ kratki na wjazd;
@@ -124,6 +131,7 @@ public class Lane {
         return result;
     }
 
+
     public void calculateNextFrame()
     {
         for (int i=0; i<lane.length; i++) {
@@ -132,14 +140,16 @@ public class Lane {
                 Vehicle currentCar = lane[i].vehicle;
                 currentCar.decideAboutLaneChange(LaneToChange.LEFT);
                 currentCar.changeLane();
-                currentCar.laneToChange = LaneToChange.NONE;
                 currentCar.calculateNextVelocity();
             }
         }
     }
 
+
     public void moveVehiclesForward()
     {
+        numberOfCarsOnLane = 0;
+        int segment;
         Cell[] nextFrameLane = new Cell[cellNumber];
         for(int i = 0; i < cellNumber; i++) nextFrameLane[i] = new Cell();
 
@@ -147,8 +157,11 @@ public class Lane {
         {
             if(lane[i].occupied)
             {
+                numberOfCarsOnLane +=1;
+                segment = Highway.segmentsByCell.get(i);
+                Highway.carsOnSegment.set(segment, (Highway.carsOnSegment.get(segment)+1));
                 Vehicle currentCellVehicle = lane[i].vehicle;
-                System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity());
+                System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity() + " Numer pasa: "+laneNumber);
                 if(currentCellVehicle.getVelocity() + i >= lane.length)
                 {
                     nextFrameLane[(currentCellVehicle.getVelocity() +i)- lane.length].occupyCell(currentCellVehicle);
@@ -159,6 +172,7 @@ public class Lane {
             }
         }
         lane = nextFrameLane;
+        System.out.println(numberOfCarsOnLane);
     }
 
 }

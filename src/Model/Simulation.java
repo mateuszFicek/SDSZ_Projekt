@@ -34,18 +34,21 @@ public class Simulation {
         switch (settings.getTime()){
             case 0:
                 startingNumberOfCars = 200;
+                break;
             case 1:
                 startingNumberOfCars = 400;
+                break;
             case 2:
                 startingNumberOfCars = 600;
+                break;
         }
 
         for(int i = 0; i < startingNumberOfCars; ++i){
             int randomRoads = rand.nextInt(2);
             int randomRoad = rand.nextInt(2);
             int randomLane = rand.nextInt(8353);
-            highway.roads[randomRoads].road[randomRoad+(1-randomRoads)].lane[randomLane].vehicle = new Car(settings.getCarMaxVelocity(), rand.nextInt(3)+3);
-            highway.roads[randomRoads].road[randomRoad+(1-randomRoads)].lane[randomLane].occupied = true;
+            highway.roads[randomRoads].road[randomRoad+1].lane[randomLane].vehicle = new Car(settings.getCarMaxVelocity(), rand.nextInt(3)+3);
+            highway.roads[randomRoads].road[randomRoad+1].lane[randomLane].occupied = true;
         }
         for(int i = 0; i < highway.roads.length; ++i){
             for(int j = 0; j < highway.roads[i].road.length; ++j){

@@ -131,12 +131,36 @@ public class Vehicle {
     public void calculateNextVelocity() {
         double probability = new Random().nextDouble();
         calculateDistanceToNextFrontVehicle();
-        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
+//        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
         if (distanceToNextCarInFront <= velocity || (probability < 0.1 && velocity == 5)) {
-                    SlowDown();
-        }
-            else if (probability >= 0.7 || velocity <= 3) {
+            if (neighbourhood[0][5] != null) {
+                decideAboutLaneChange(LaneToChange.LEFT);
+            }
+            if (laneToChange == LaneToChange.NONE) {
+                SlowDown();
+            }
+
+
+        } else if (probability >= 0.7 || velocity <= 3) {
             SpeedUp();
+        }
+    }
+
+    public void changeLane()
+    {
+        if(laneToChange == LaneToChange.LEFT)
+        {
+            neighbourhood[0][5].occupyCell(this);
+            neighbourhood[1][5].freeCell();
+            laneToChange = LaneToChange.NONE;
+
+
+        }
+        else if(laneToChange == LaneToChange.RIGHT)
+        {
+            neighbourhood[1][5].freeCell();
+            neighbourhood[2][5].occupyCell(this);
+            laneToChange = LaneToChange.NONE;
         }
     }
 
