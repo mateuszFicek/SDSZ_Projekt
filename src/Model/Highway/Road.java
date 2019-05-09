@@ -34,12 +34,12 @@ public class Road {
                         if (i - j >= 0) {
                             currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[i - j];
                         } else {
-                            currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[laneLength - j];
+                            currentCellVehicle.neighbourhood[0][5 - j] = road[laneIndex - 1].lane[laneLength - j + 1];
                         }
                         if (i + j < laneLength) {
                             currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[i + j];
                         } else {
-                            currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[(i + j) - laneLength];
+                            currentCellVehicle.neighbourhood[0][5 + j] = road[laneIndex - 1].lane[(i + j) - laneLength + 1];
                         }
                     }
                 }
@@ -52,12 +52,12 @@ public class Road {
                         if (i - j >= 0) {
                             currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[i - j];
                         } else {
-                            currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[laneLength - j];
+                            currentCellVehicle.neighbourhood[2][5 - j] = road[laneIndex + 1].lane[laneLength - j + 1];
                         }
                         if (i + j < laneLength) {
                             currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[i + j];
                         } else {
-                            currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[(i + j) - laneLength];
+                            currentCellVehicle.neighbourhood[2][5 + j] = road[laneIndex + 1].lane[(i + j) - laneLength + 1];
                         }
                     }
                 } else
