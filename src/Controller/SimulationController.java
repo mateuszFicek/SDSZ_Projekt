@@ -7,9 +7,13 @@ import Model.Simulation;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,8 +56,12 @@ public class SimulationController extends BaseController implements Initializabl
         System.out.println(this.settings);
     }
 
-    protected void initSimulation(){
+    protected void initSimulation() {
         this.simulation = new Simulation(settings);
+    }
+
+    void initSimulation(Simulation simulation) {
+        this.simulation = simulation;
     }
 
     @Override
@@ -69,11 +77,102 @@ public class SimulationController extends BaseController implements Initializabl
     }
 
     private void updateLabelsText() {
-        for(int i = 0; i < labelList.size(); ++i){
+        for (int i = 0; i < labelList.size(); ++i) {
             labelList.get(i).setText(String.valueOf(Highway.carsOnSegment.get(i)));
         }
     }
 
+
     public void startSimulation(ActionEvent event) {
     }
+
+    public void simulateSegment1(ActionEvent event) throws IOException {
+        changeSceneToSegment(1, event);
+    }
+
+    public void simulateSegment2(ActionEvent event) throws IOException {
+        changeSceneToSegment(2, event);
+    }
+
+    public void simulateSegment3(ActionEvent event) throws IOException {
+        changeSceneToSegment(3, event);
+    }
+
+    public void simulateSegment4(ActionEvent event) throws IOException {
+        changeSceneToSegment(4, event);
+    }
+
+    public void simulateSegment5(ActionEvent event) throws IOException {
+        changeSceneToSegment(5, event);
+    }
+
+    public void simulateSegment6(ActionEvent event) throws IOException {
+        changeSceneToSegment(6, event);
+    }
+
+    public void simulateSegment7(ActionEvent event) throws IOException {
+        changeSceneToSegment(7, event);
+    }
+
+    public void simulateSegment8(ActionEvent event) throws IOException {
+        changeSceneToSegment(8, event);
+    }
+
+    public void simulateSegment9(ActionEvent event) throws IOException {
+        changeSceneToSegment(9, event);
+    }
+
+    public void simulateSegment10(ActionEvent event) throws IOException {
+        changeSceneToSegment(10, event);
+    }
+
+    public void simulateSegment11(ActionEvent event) throws IOException {
+        changeSceneToSegment(11, event);
+    }
+
+    public void simulateSegment12(ActionEvent event) throws IOException {
+        changeSceneToSegment(12, event);
+    }
+
+    public void simulateSegment13(ActionEvent event) throws IOException {
+        changeSceneToSegment(13, event);
+    }
+
+    public void simulateSegment14(ActionEvent event) throws IOException {
+        changeSceneToSegment(14, event);
+    }
+
+    public void simulateSegment15(ActionEvent event) throws IOException {
+        changeSceneToSegment(15, event);
+    }
+
+    public void simulateSegment16(ActionEvent event) throws IOException {
+        changeSceneToSegment(16, event);
+    }
+
+    public void simulateSegment17(ActionEvent event) throws IOException {
+        changeSceneToSegment(17, event);
+    }
+
+    private void changeSceneToSegment(int i, ActionEvent event) throws IOException {
+        h.stop();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Segment.fxml"));
+
+        Parent optionsParent = loader.load();
+        Scene simulationScene = new Scene(optionsParent);
+
+        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        window.setScene(simulationScene);
+
+
+        SegmentController segmentController = loader.getController();
+        segmentController.initSettings(super.settings);
+        segmentController.initSimulation(simulation);
+        segmentController.initSegment(i);
+        segmentController.h.start();
+
+
+        window.show();
+    }
+
 }

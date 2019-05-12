@@ -19,6 +19,11 @@ public class Cell {
         setOccupied(false);
     }
 
+    public Cell(CellType type){
+        setOccupied(false);
+        cellType = type;
+    }
+
     public boolean getOccupied() {
         return occupied;
     }
