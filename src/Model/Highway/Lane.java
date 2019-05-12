@@ -151,7 +151,7 @@ public class Lane {
         numberOfCarsOnLane = 0;
         int segment;
         Cell[] nextFrameLane = new Cell[cellNumber];
-        for(int i = 0; i < cellNumber; i++) nextFrameLane[i] = new Cell();
+        for(int i = 0; i < cellNumber; i++) nextFrameLane[i] = new Cell(lane[i].cellType);
 
         for(int i=0; i<lane.length; i++)
         {
