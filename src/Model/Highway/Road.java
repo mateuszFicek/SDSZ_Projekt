@@ -74,9 +74,7 @@ public class Road {
                 } else {
                     currentCellVehicle.neighbourhood[2] = null;
                 }
-                if(laneIndex == 1) { //dodany if, bo chyba tylko wtedy ma sie ustawiac???
-                    currentCellVehicle.neighbourhood[1][5] = road[laneIndex].lane[i];
-                }
+                currentCellVehicle.neighbourhood[1][5] = road[laneIndex].lane[i];
                 for (int j = 1; j < 5; j++) {
                     if (i - j >= 0) {
                         currentCellVehicle.neighbourhood[1][5 - j] = road[laneIndex].lane[i - j];
