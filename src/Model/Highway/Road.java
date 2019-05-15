@@ -24,7 +24,7 @@ public class Road {
 
     public void generateNextFrame() {
         for (int index = 0; index < road.length; index++) {
-            road[index].calculateNextFrame();
+            road[index].calculateNextFrame(index);
             road[index].moveVehiclesForward();
             moveCarsNeighbourhoods(index);
         }

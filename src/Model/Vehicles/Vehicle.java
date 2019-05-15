@@ -38,14 +38,20 @@ public class Vehicle {
     }
     public int getDistanceToNextCarInFront() {return distanceToNextCarInFront;}
 
-    public void calculateDistanceToNextFrontVehicle() {
-        int neighbourhoodToCheck=1;
+    public void calculateDistanceToNextFrontVehicle(int roadIndex) {
+        int neighbourhoodToCheck=roadIndex;
         switch (laneToChange) {
             case LEFT:
-                neighbourhoodToCheck=0;
+                if (roadIndex==2)
+                    return;
+                else
+                    neighbourhoodToCheck=roadIndex+1;
                 break;
             case RIGHT:
-                neighbourhoodToCheck=2;
+                if(roadIndex == 0)
+                    return;
+                else
+                    neighbourhoodToCheck=roadIndex-1;
                 break;
         }
 
@@ -63,8 +69,8 @@ public class Vehicle {
         distanceToNextCarInFront += 1;
     }
 
-    public void decideAboutLaneChange(LaneToChange directionToChange) {
-        calculateDistanceToNextFrontVehicle();
+    public void decideAboutLaneChange(LaneToChange directionToChange, int roadIndex) {
+        calculateDistanceToNextFrontVehicle(roadIndex);
         if(distanceToNextCarInFront >velocity){
             laneToChange = LaneToChange.NONE;
             return;
@@ -114,13 +120,13 @@ public class Vehicle {
     }
 
 
-    public void calculateNextVelocity() {
+    public void calculateNextVelocity(int roadIndex) {
         double probability = new Random().nextDouble();
-        calculateDistanceToNextFrontVehicle();
+        calculateDistanceToNextFrontVehicle(roadIndex);
 //        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
         if (distanceToNextCarInFront <= velocity || (probability < 0.1 && velocity == 5)) {
-            if (neighbourhood[0][5] != null) {
-                decideAboutLaneChange(LaneToChange.LEFT);
+            if (neighbourhood[roadIndex][maxVelocity] != null) {
+                decideAboutLaneChange(LaneToChange.LEFT, roadIndex);
             }
             if (laneToChange == LaneToChange.NONE) {
                 SlowDown();

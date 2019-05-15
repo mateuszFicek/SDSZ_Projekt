@@ -132,15 +132,18 @@ public class Lane {
     }
 
 
-    public void calculateNextFrame()
+    public void calculateNextFrame(int roadIndex)
     {
         for (int i=0; i<lane.size(); i++) {
             if(lane.get(i).occupied)
             {
                 Vehicle currentCar = lane.get(i).vehicle;
-                currentCar.decideAboutLaneChange(LaneToChange.LEFT);
+                currentCar.decideAboutLaneChange(LaneToChange.LEFT,roadIndex);
                 currentCar.changeLane();
-                currentCar.calculateNextVelocity();
+                currentCar.calculateNextVelocity(roadIndex);
+                if(currentCar.neighbourhood[0][currentCar.maxVelocity].cellType == CellType.EXIT){
+                    System.out.println("NUM ----> " +i+" <----KOLO ZJAZDU");
+                }
             }
         }
     }
