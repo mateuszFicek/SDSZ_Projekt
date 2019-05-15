@@ -139,6 +139,9 @@ public class Lane {
             {
                 Vehicle currentCar = lane.get(i).vehicle;
                 currentCar.decideAboutLaneChange(LaneToChange.LEFT,laneIndex);
+                if(laneIndex == 2) {
+                    currentCar.decideAboutLaneChange(LaneToChange.RIGHT, laneIndex);
+                }
                 int newIndex = currentCar.changeLane(laneIndex);
                 currentCar.calculateNextVelocity(newIndex);
                 if(currentCar.neighbourhood[0][currentCar.maxVelocity].cellType == CellType.EXIT){

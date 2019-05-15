@@ -63,19 +63,18 @@ public class Vehicle {
             laneToChange = LaneToChange.NONE;
             return;
         }
-
-        if(distanceToNextCarInFront >velocity){
+        if(distanceToNextCarInFront >=velocity){
                     laneToChange = LaneToChange.NONE;
                     return;
                 }
-                Vehicle vehicleBehind = null;
-                int whereToChange =0;
-                switch (directionToChange) {
-                    case LEFT:
-                        whereToChange=0;
-                        break;
-                    case RIGHT:
-                        whereToChange=2;
+        Vehicle vehicleBehind = null;
+        int whereToChange =0;
+        switch (directionToChange) {
+            case LEFT:
+                whereToChange=roadIndex+1;
+                break;
+                case RIGHT:
+                    whereToChange=roadIndex-1;
                 break;
     }
         if(neighbourhood[whereToChange] != null) {
@@ -92,21 +91,20 @@ public class Vehicle {
 
         double probability = new Random().nextDouble();
 
-        if(distanceToNextCarInFront<=velocity) {
             if (vehicleBehind != null) {
-                if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
+                if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.9) {
                     laneToChange = directionToChange;
                     return;
-                } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.9) {
+                } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.2) {
                     laneToChange = directionToChange;
                     return;
                 }
-            } else
+            }
+            else
             {
                 laneToChange = directionToChange;
                 return;
             }
-        }
 
     }
     laneToChange = LaneToChange.NONE;
@@ -120,7 +118,7 @@ public class Vehicle {
         }
         hasChangedLane = false;
 //        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
-        if (distanceToNextCarInFront <= velocity || (probability < 0.1 && velocity == 5)) {
+        if (distanceToNextCarInFront <= velocity || (probability > 0.6 && velocity == 5)) {
                 SlowDown();
         } else {
             SpeedUp();
