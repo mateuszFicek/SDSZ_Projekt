@@ -18,4 +18,7 @@ public class Car extends Vehicle {
         this.maxVelocity = maxVelocity;
         this.velocity = 1;
     }
+    public int getMaxVelocity(){
+        return maxVelocity;
+    }
 }

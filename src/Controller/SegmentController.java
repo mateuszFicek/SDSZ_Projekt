@@ -54,16 +54,16 @@ public class SegmentController extends BaseController{
         for(int i = 0; i < numberOfRoads; ++i){
             for(int j = 0; j < numberOfLanes; ++j){
                 for (int k = 0; k < numberOfCells; ++k){
-                    if (simulation.getHighway().roads[i].road[j].lane[k+ Highway.startOfSegments.get(segment - 1)].occupied){
+                    if (simulation.getHighway().roads[i].road[j].lane.get(k+ Highway.startOfSegments.get(segment - 1)).occupied){
                         highwayGrid.setCellMatrix((i*(numberOfLanes))+(j*(1-i)+ ((2-j)*i)),k, Color.RED);
                     }
-                    else if(simulation.getHighway().roads[i].road[j].lane[k + Highway.startOfSegments.get(segment - 1)].cellType == Cell.CellType.DISABLED){
+                    else if(simulation.getHighway().roads[i].road[j].lane.get(k + Highway.startOfSegments.get(segment - 1)).cellType == Cell.CellType.DISABLED){
                         highwayGrid.setCellMatrix((i*(numberOfLanes))+(j*(1-i)+ ((2-j)*i)),k, Color.BLACK);
                     }
-                    else if(simulation.getHighway().roads[i].road[j].lane[k + Highway.startOfSegments.get(segment - 1)].cellType == Cell.CellType.ENTRY){
+                    else if(simulation.getHighway().roads[i].road[j].lane.get(k + Highway.startOfSegments.get(segment - 1)).cellType == Cell.CellType.ENTRY){
                         highwayGrid.setCellMatrix((i*(numberOfLanes))+(j*(1-i)+ ((2-j)*i)),k, Color.GREEN);
                     }
-                    else if(simulation.getHighway().roads[i].road[j].lane[k + Highway.startOfSegments.get(segment - 1)].cellType == Cell.CellType.EXIT){
+                    else if(simulation.getHighway().roads[i].road[j].lane.get(k + Highway.startOfSegments.get(segment - 1)).cellType == Cell.CellType.EXIT){
                         highwayGrid.setCellMatrix((i*(numberOfLanes))+(j*(1-i)+ ((2-j)*i)),k, Color.BLUE);
                     }
                     else {

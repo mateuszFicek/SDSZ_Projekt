@@ -9,9 +9,7 @@ public class Main {
         Highway highway = new Highway(2);
         highway.setupHighway();
 
-         for(int k = 0; k < 1000;k++){
-             System.out.println(k + "   " + highway.roads[0].road[0].lane[k].getCellType() + " " + highway.roads[0].road[1].lane[k].getCellType()+ " " + highway.roads[0].road[2].lane[k].getCellType());
-         }
+
 
 
     }

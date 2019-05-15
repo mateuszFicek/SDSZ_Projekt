@@ -1,6 +1,7 @@
 package Model.Vehicles;
 
 import Model.Highway.Cell;
+import Model.Highway.CircularArrayList;
 
 import java.util.Random;
 
@@ -8,7 +9,7 @@ import java.util.Random;
 public class Vehicle {
     protected int velocity;
     public Cell[][] neighbourhood;
-    protected int maxVelocity;
+    public int maxVelocity;
     protected int distanceToNextCarInFront = 0;
     protected int distanceToNextCarInBack = 0;
 
