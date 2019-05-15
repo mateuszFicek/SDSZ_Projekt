@@ -18,13 +18,17 @@ public class Simulation {
 
 //       CODE FOR TESTING
         Vehicle car = new Car();
-        car.increaseVelocity(3);
+        car.increaseVelocity(5);
         Vehicle car2 = new Car();
+        Vehicle car3 = new Car();
+        car.increaseVelocity(0);
         highway.roads[0].road[1].lane.get(50).vehicle = car;
         highway.roads[0].road[1].lane.get(50).occupied = true;
-        highway.roads[0].road[1].lane.get(53).vehicle = car2;
-        highway.roads[0].road[1].lane.get(53).occupied = true;
-        highway.roads[0].moveCarsNeighbourhoods(2);
+        highway.roads[0].road[1].lane.get(51).vehicle = car2;
+        highway.roads[0].road[1].lane.get(51).occupied = true;
+        highway.roads[0].road[1].lane.get(52).vehicle= car3;
+        highway.roads[0].road[1].lane.get(52).occupied = true;
+        highway.roads[0].moveCarsNeighbourhoods(1);
     }
 
     public Simulation(Settings settings){

@@ -40,32 +40,16 @@ public class Vehicle {
     public int getDistanceToNextCarInFront() {return distanceToNextCarInFront;}
 
     public void calculateDistanceToNextFrontVehicle(int roadIndex) {
-        int neighbourhoodToCheck=roadIndex;
-        switch (laneToChange) {
-            case LEFT:
-                if (roadIndex==2)
-                    return;
-                else
-                    neighbourhoodToCheck=roadIndex+1;
-                break;
-            case RIGHT:
-                if(roadIndex == 0)
-                    return;
-                else
-                    neighbourhoodToCheck=roadIndex-1;
-                break;
-        }
-
-        for (int i = (neighbourhood[neighbourhoodToCheck].length / 2) + 1, j = 1; i < neighbourhood[neighbourhoodToCheck].length; i++) {
+        for (int i = (neighbourhood[roadIndex].length / 2) + 1, j = 1; i < neighbourhood[roadIndex].length; i++) {
 //            System.out.println(i);
-            if (!neighbourhood[neighbourhoodToCheck][i].occupied) {
+            if (!neighbourhood[roadIndex][i].occupied) {
                 distanceToNextCarInFront = j;
                 j++;
             } else {
                 distanceToNextCarInFront = j;
-                return;
+                break;
             }
-
+            distanceToNextCarInFront-=1;
         }
     }
 
@@ -99,7 +83,7 @@ public class Vehicle {
 
         double probability = new Random().nextDouble();
 
-        if(distanceToNextCarInFront<velocity) {
+        if(distanceToNextCarInFront<=velocity) {
             if (vehicleBehind != null) {
                 if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
                     laneToChange = directionToChange;
@@ -129,7 +113,7 @@ public class Vehicle {
 //        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
         if (distanceToNextCarInFront <= velocity || (probability < 0.1 && velocity == 5)) {
                 SlowDown();
-        } else if (probability >= 0.7 || velocity <= 3) {
+        } else {
             SpeedUp();
         }
     }
