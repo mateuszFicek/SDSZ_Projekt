@@ -23,11 +23,14 @@ public class Road {
     }
 
     public void generateNextFrame() {
+        int suma = 0;
         for (int index = 0; index < road.length; index++) {
             road[index].calculateNextFrame(index);
-            road[index].moveVehiclesForward();
+            int l = road[index].moveVehiclesForward(index);
+            suma +=l;
             moveCarsNeighbourhoods(index);
         }
+        System.out.println("SUMA NA WSZYSTKICH: " + suma);
     }
 
     public void moveCarsNeighbourhoods(int laneIndex) {

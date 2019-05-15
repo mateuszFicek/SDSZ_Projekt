@@ -149,7 +149,7 @@ public class Lane {
     }
 
 
-    public void moveVehiclesForward()
+    public int moveVehiclesForward(int lineIndex)
     {
         numberOfCarsOnLane = 0;
         int segment;
@@ -176,6 +176,7 @@ public class Lane {
         }
         lane = nextFrameLane;
         System.out.println(numberOfCarsOnLane);
+        return numberOfCarsOnLane;
     }
 
 }
