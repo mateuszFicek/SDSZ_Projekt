@@ -132,15 +132,15 @@ public class Lane {
     }
 
 
-    public void calculateNextFrame(int roadIndex)
+    public void calculateNextFrame(int laneIndex)
     {
         for (int i=0; i<lane.size(); i++) {
             if(lane.get(i).occupied)
             {
                 Vehicle currentCar = lane.get(i).vehicle;
-                currentCar.decideAboutLaneChange(LaneToChange.LEFT,roadIndex);
-                currentCar.changeLane();
-                currentCar.calculateNextVelocity(roadIndex);
+                currentCar.decideAboutLaneChange(LaneToChange.LEFT,laneIndex);
+                currentCar.changeLane(laneIndex);
+                currentCar.calculateNextVelocity(laneIndex);
                 if(currentCar.neighbourhood[0][currentCar.maxVelocity].cellType == CellType.EXIT){
                     System.out.println("NUM ----> " +i+" <----KOLO ZJAZDU");
                 }

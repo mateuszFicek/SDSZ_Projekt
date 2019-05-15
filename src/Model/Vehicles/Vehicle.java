@@ -138,20 +138,20 @@ public class Vehicle {
         }
     }
 
-    public void changeLane()
+    public void changeLane(int laneIndex)
     {
         if(laneToChange == LaneToChange.LEFT)
         {
-            neighbourhood[0][5].occupyCell(this);
-            neighbourhood[1][5].freeCell();
+            neighbourhood[laneIndex-1][5].occupyCell(this);
+            neighbourhood[laneIndex][5].freeCell();
             laneToChange = LaneToChange.NONE;
 
 
         }
         else if(laneToChange == LaneToChange.RIGHT)
         {
-            neighbourhood[1][5].freeCell();
-            neighbourhood[2][5].occupyCell(this);
+            neighbourhood[laneIndex][5].freeCell();
+            neighbourhood[laneIndex+1][5].occupyCell(this);
             laneToChange = LaneToChange.NONE;
         }
     }
