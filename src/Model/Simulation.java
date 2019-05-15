@@ -20,10 +20,10 @@ public class Simulation {
         Vehicle car = new Car();
         car.increaseVelocity(3);
         Vehicle car2 = new Car();
-        highway.roads[0].road[2].lane.get(50).vehicle = car;
-        highway.roads[0].road[2].lane.get(50).occupied = true;
-        highway.roads[0].road[2].lane.get(53).vehicle = car2;
-        highway.roads[0].road[2].lane.get(53).occupied = true;
+        highway.roads[0].road[1].lane.get(50).vehicle = car;
+        highway.roads[0].road[1].lane.get(50).occupied = true;
+        highway.roads[0].road[1].lane.get(53).vehicle = car2;
+        highway.roads[0].road[1].lane.get(53).occupied = true;
         highway.roads[0].moveCarsNeighbourhoods(2);
     }
 

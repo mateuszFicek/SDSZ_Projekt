@@ -12,6 +12,7 @@ public class Vehicle {
     public int maxVelocity;
     protected int distanceToNextCarInFront = 0;
     protected int distanceToNextCarInBack = 0;
+    public  boolean hasChangedLane = false;
 
     public  LaneToChange laneToChange = LaneToChange.NONE;
 
@@ -71,89 +72,89 @@ public class Vehicle {
 
     public void decideAboutLaneChange(LaneToChange directionToChange, int roadIndex) {
         calculateDistanceToNextFrontVehicle(roadIndex);
-        if(distanceToNextCarInFront >velocity){
-            laneToChange = LaneToChange.NONE;
-            return;
-        }
-        Vehicle vehicleBehind = null;
-        int whereToChange =0;
-        switch (directionToChange) {
-            case LEFT:
-                whereToChange=0;
-                break;
-            case RIGHT:
-                whereToChange=2;
-                break;
-        }
-        if(neighbourhood[whereToChange] != null) {
-            for (int i = (neighbourhood[whereToChange].length / 2) + 1, j = 1; i>=0; i--) {
-                if (!neighbourhood[whereToChange][i].occupied) {
-                    distanceToNextCarInBack = j;
-                    j++;
-                } else {
-                    vehicleBehind = neighbourhood[0][i].vehicle;
-                    distanceToNextCarInBack = j;
-                    break;
+                if(distanceToNextCarInFront >velocity){
+                    laneToChange = LaneToChange.NONE;
+                    return;
                 }
+                Vehicle vehicleBehind = null;
+                int whereToChange =0;
+                switch (directionToChange) {
+                    case LEFT:
+                        whereToChange=0;
+                        break;
+                    case RIGHT:
+                        whereToChange=2;
+                break;
+    }
+        if(neighbourhood[whereToChange] != null) {
+        for (int i = (neighbourhood[whereToChange].length / 2) + 1, j = 1; i>=0; i--) {
+            if (!neighbourhood[whereToChange][i].occupied) {
+                distanceToNextCarInBack = j;
+                j++;
+            } else {
+                vehicleBehind = neighbourhood[0][i].vehicle;
+                distanceToNextCarInBack = j;
+                break;
             }
+        }
 
-            double probability = new Random().nextDouble();
+        double probability = new Random().nextDouble();
 
-            if(distanceToNextCarInFront<velocity) {
-                if (vehicleBehind != null) {
-                    if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
-                        laneToChange = directionToChange;
-                        return;
-                    } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.9) {
-                        laneToChange = directionToChange;
-                        return;
-                    }
-                } else
-                {
+        if(distanceToNextCarInFront<velocity) {
+            if (vehicleBehind != null) {
+                if (vehicleBehind.getVelocity() < distanceToNextCarInBack && probability <= 0.2) {
+                    laneToChange = directionToChange;
+                    return;
+                } else if (vehicleBehind.getVelocity() >= distanceToNextCarInBack && probability <= 0.9) {
                     laneToChange = directionToChange;
                     return;
                 }
+            } else
+            {
+                laneToChange = directionToChange;
+                return;
             }
-
         }
-        laneToChange = LaneToChange.NONE;
+
     }
+    laneToChange = LaneToChange.NONE;
+}
 
 
     public void calculateNextVelocity(int roadIndex) {
         double probability = new Random().nextDouble();
-        calculateDistanceToNextFrontVehicle(roadIndex);
+        if(hasChangedLane) {
+            calculateDistanceToNextFrontVehicle(roadIndex);
+        }
+        hasChangedLane = false;
 //        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
         if (distanceToNextCarInFront <= velocity || (probability < 0.1 && velocity == 5)) {
-            if (neighbourhood[roadIndex][maxVelocity] != null) {
-                decideAboutLaneChange(LaneToChange.LEFT, roadIndex);
-            }
-            if (laneToChange == LaneToChange.NONE) {
                 SlowDown();
-            }
-
-
         } else if (probability >= 0.7 || velocity <= 3) {
             SpeedUp();
         }
     }
 
-    public void changeLane(int laneIndex)
+    public int changeLane(int laneIndex)
     {
         if(laneToChange == LaneToChange.LEFT)
         {
-            neighbourhood[laneIndex-1][5].occupyCell(this);
+            neighbourhood[laneIndex+1][5].occupyCell(this);
             neighbourhood[laneIndex][5].freeCell();
             laneToChange = LaneToChange.NONE;
-
-
+            hasChangedLane = true;
+            return laneIndex+1;
         }
         else if(laneToChange == LaneToChange.RIGHT)
         {
             neighbourhood[laneIndex][5].freeCell();
-            neighbourhood[laneIndex+1][5].occupyCell(this);
+            neighbourhood[laneIndex-1][5].occupyCell(this);
             laneToChange = LaneToChange.NONE;
+            hasChangedLane = true;
+            return laneIndex-1;
         }
+
+        return laneIndex;
     }
 
     private void SpeedUp() {

@@ -139,8 +139,8 @@ public class Lane {
             {
                 Vehicle currentCar = lane.get(i).vehicle;
                 currentCar.decideAboutLaneChange(LaneToChange.LEFT,laneIndex);
-                currentCar.changeLane(laneIndex);
-                currentCar.calculateNextVelocity(laneIndex);
+                int newIndex = currentCar.changeLane(laneIndex);
+                currentCar.calculateNextVelocity(newIndex);
                 if(currentCar.neighbourhood[0][currentCar.maxVelocity].cellType == CellType.EXIT){
                     System.out.println("NUM ----> " +i+" <----KOLO ZJAZDU");
                 }
