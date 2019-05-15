@@ -67,7 +67,6 @@ public class Vehicle {
             }
 
         }
-        distanceToNextCarInFront += 1;
     }
 
     public void decideAboutLaneChange(LaneToChange directionToChange, int roadIndex) {
