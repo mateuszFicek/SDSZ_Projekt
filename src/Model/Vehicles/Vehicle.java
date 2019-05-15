@@ -55,7 +55,16 @@ public class Vehicle {
 
     public void decideAboutLaneChange(LaneToChange directionToChange, int roadIndex) {
         calculateDistanceToNextFrontVehicle(roadIndex);
-                if(distanceToNextCarInFront >velocity){
+        if(roadIndex == 2  && directionToChange == LaneToChange.LEFT) {
+            laneToChange = LaneToChange.NONE;
+            return;
+        } else if(roadIndex == 0 && directionToChange == LaneToChange.RIGHT)
+        {
+            laneToChange = LaneToChange.NONE;
+            return;
+        }
+
+        if(distanceToNextCarInFront >velocity){
                     laneToChange = LaneToChange.NONE;
                     return;
                 }
