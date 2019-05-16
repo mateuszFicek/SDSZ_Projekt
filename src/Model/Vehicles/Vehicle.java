@@ -13,16 +13,18 @@ public class Vehicle {
     protected int distanceToNextCarInFront = 0;
     protected int distanceToNextCarInBack = 0;
     public  boolean hasChangedLane = false;
+    public int numberOfExits;
+    public int numberOfCellsToPass = 40;
 
     public  LaneToChange laneToChange = LaneToChange.NONE;
 
     public Vehicle() {
         neighbourhood = new Cell[3][11];
-        for (int i = 0; i < neighbourhood.length; ++i) {
-            for (int j = 0; j < neighbourhood[i].length; ++j) {
-                neighbourhood[i][j] = new Cell();
-            }
-        }
+//        for (int i = 0; i < neighbourhood.length; ++i) {
+//            for (int j = 0; j < neighbourhood[i].length; ++j) {
+//                neighbourhood[i][j] = new Cell();
+//            }
+//        }
 
     }
 
@@ -110,6 +112,27 @@ public class Vehicle {
     laneToChange = LaneToChange.NONE;
 }
 
+    public void checkExits(int index, int laneIndex){
+        if (numberOfExits > 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.ENTRY) {
+            if (numberOfCellsToPass == 40) {
+                numberOfExits--;
+                System.out.println(index + " ------- Jeszcze nie gotowy do zjazdu, ale powinno być 40: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits );
+                numberOfCellsToPass -= velocity;
+            }
+            else {
+                numberOfCellsToPass -= velocity;
+                System.out.println(index + " ------- Jeszcze nie gotowy do zjazdu, ale powinno być mniej: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits );
+            }
+        }
+        else if(numberOfExits == 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.ENTRY ){
+            System.out.println(index + " ------- Gotowy do zjazdu: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits );
+            neighbourhood[0][maxVelocity].occupyCell(this);
+            neighbourhood[laneIndex][maxVelocity].freeCell();
+        }
+        else {
+            numberOfCellsToPass = 40;
+        }
+    }
 
     public void calculateNextVelocity(int roadIndex) {
         double probability = new Random().nextDouble();

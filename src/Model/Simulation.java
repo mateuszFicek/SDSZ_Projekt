@@ -43,7 +43,7 @@ public class Simulation {
                 startingNumberOfCars = 400;
                 break;
             case 2:
-                startingNumberOfCars = 600;
+                startingNumberOfCars = 1000;
                 break;
         }
 
@@ -51,7 +51,7 @@ public class Simulation {
             int randomRoads = rand.nextInt(2);
             int randomRoad = rand.nextInt(2);
             int randomLane = rand.nextInt(8353);
-            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).vehicle = new Car(settings.getCarMaxVelocity(), rand.nextInt(3)+3);
+            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).vehicle = new Car(settings.getCarMaxVelocity(), rand.nextInt(3)+3, rand.nextInt(2) + 1);
             highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).occupied = true;
         }
         for(int i = 0; i < highway.roads.length; ++i){

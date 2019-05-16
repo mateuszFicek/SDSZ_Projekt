@@ -26,11 +26,14 @@ public class Road {
         int suma = 0;
         for (int index = 0; index < road.length; index++) {
             road[index].calculateNextFrame(index);
-            int l = road[index].moveVehiclesForward(index);
-            suma +=l;
             moveCarsNeighbourhoods(index);
         }
+        for(int index = 0; index < road.length; index++){
+            int l = road[index].moveVehiclesForward(index);
+            suma +=l;
+        }
         System.out.println("SUMA NA WSZYSTKICH: " + suma);
+        System.out.println("--------------------------------------------------------------");
     }
 
     public void moveCarsNeighbourhoods(int laneIndex) {
@@ -38,8 +41,8 @@ public class Road {
         for (int i = 0; i < laneLength; i++) {
             if (road[laneIndex].lane.get(i).occupied) {
                 Vehicle currentCellVehicle = road[laneIndex].lane.get(i).vehicle;
-                for (int k = 0; k < 2; k++) {
-                    for (int j = 0; j < currentCellVehicle.maxVelocity; j++) {
+                for (int k = 0; k < 3; k++) {
+                    for (int j = 0; j <= currentCellVehicle.maxVelocity; j++) {
                         if (i - j >= 0) {
                             currentCellVehicle.neighbourhood[k][currentCellVehicle.maxVelocity - j] = road[k].lane.get(i - j);
                         } else {
