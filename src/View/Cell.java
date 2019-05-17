@@ -1,5 +1,6 @@
 package View;
 
+import Model.Vehicles.Vehicle;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -9,6 +10,7 @@ public class Cell extends Rectangle {
     private final int x;
     private final int y;
     private Color color;
+    private Vehicle vehicle;
 
     public void setColor(Color color){
         this.color = color;
@@ -28,5 +30,13 @@ public class Cell extends Rectangle {
         setHeight(this.height);
         setWidth(this.width);
         relocate(x*this.width, y*this.height);
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 }
