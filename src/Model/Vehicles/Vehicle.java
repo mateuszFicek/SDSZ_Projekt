@@ -133,7 +133,7 @@ public class Vehicle {
                 laneToChange = LaneToChange.NONE;
             else
                 laneToChange = LaneToChange.RIGHT;
-            decideAboutLaneChange(laneToChange,laneIndex);
+            //decideAboutLaneChange(laneToChange,laneIndex);
             changeLane(laneIndex);
         }
         else {
