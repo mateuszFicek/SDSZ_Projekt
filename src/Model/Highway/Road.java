@@ -26,11 +26,13 @@ public class Road {
         int suma = 0;
         for (int index = 0; index < road.length; index++) {
             road[index].calculateNextFrame(index);
-            moveCarsNeighbourhoods(index);
         }
-        for(int index = 0; index < road.length; index++){
+        for (int index = 0; index < road.length; index++) {
             int l = road[index].moveVehiclesForward(index);
-            suma +=l;
+            suma += l;
+        }
+        for (int index = 0; index < road.length; index++) {
+            moveCarsNeighbourhoods(index);
         }
         System.out.println("SUMA NA WSZYSTKICH: " + suma);
         System.out.println("--------------------------------------------------------------");

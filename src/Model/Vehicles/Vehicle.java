@@ -114,7 +114,7 @@ public class Vehicle {
 }
 
     public void checkExits(int index, int laneIndex){
-        if (numberOfExits > 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.ENTRY) {
+        if (numberOfExits > 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.EXIT) {
             if (numberOfCellsToPass == 40) {
                 numberOfExits--;
                 System.out.println(index + " ------- Jeszcze nie gotowy do zjazdu, ale powinno być 40: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits );
@@ -125,10 +125,16 @@ public class Vehicle {
                 System.out.println(index + " ------- Jeszcze nie gotowy do zjazdu, ale powinno być mniej: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits );
             }
         }
-        else if(numberOfExits == 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.ENTRY ){
+        else if(numberOfExits == 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.EXIT ){
             System.out.println(index + " ------- Gotowy do zjazdu: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits );
-            neighbourhood[0][maxVelocity].occupyCell(this);
-            neighbourhood[laneIndex][maxVelocity].freeCell();
+            //neighbourhood[0][maxVelocity].occupyCell(this);
+            //neighbourhood[laneIndex][maxVelocity].freeCell();
+            if(laneIndex == 0)
+                laneToChange = LaneToChange.NONE;
+            else
+                laneToChange = LaneToChange.RIGHT;
+            decideAboutLaneChange(laneToChange,laneIndex);
+            changeLane(laneIndex);
         }
         else {
             numberOfCellsToPass = 40;
