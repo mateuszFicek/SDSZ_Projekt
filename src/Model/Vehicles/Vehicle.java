@@ -49,10 +49,11 @@ public class Vehicle {
                 j++;
             } else {
                 distanceToNextCarInFront = j;
-                break;
+                return;
             }
-            distanceToNextCarInFront-=1;
+           // distanceToNextCarInFront-=1;
         }
+        distanceToNextCarInFront += 1;
     }
 
     public void decideAboutLaneChange(LaneToChange directionToChange, int roadIndex) {
