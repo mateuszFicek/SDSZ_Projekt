@@ -134,9 +134,13 @@ public class Lane {
         for (int i = 0; i < lane.size(); i++) {
             if (lane.get(i).occupied) {
                 Vehicle currentCar = lane.get(i).vehicle;
-                currentCar.decideAboutLaneChange(LaneToChange.LEFT, laneIndex);
+                currentCar.calculateDistanceToNextFrontVehicle(laneIndex);
+
+                if (laneIndex == 1) {
+                    currentCar.decideAboutChangeLaneToLeft(LaneToChange.LEFT, laneIndex);
+                }
                 if (laneIndex == 2) {
-                    currentCar.decideAboutLaneChange(LaneToChange.RIGHT, laneIndex);
+                    currentCar.decideAboutChangeLaneToRight(LaneToChange.RIGHT, laneIndex);
                 }
 
             }
@@ -144,7 +148,6 @@ public class Lane {
         for (int i = 0; i < lane.size(); i++) {
             if (lane.get(i).occupied) {
                 Vehicle currentCar = lane.get(i).vehicle;
-
                 int newIndex = currentCar.changeLane(laneIndex);
                 currentCar.calculateNextVelocity(newIndex);
                 currentCar.checkExits(i, newIndex);
