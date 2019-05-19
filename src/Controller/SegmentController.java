@@ -86,11 +86,12 @@ public class SegmentController extends BaseController {
                         highwayGrid.getCellMatrix()[x][y].setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                pickedCarHash = highwayGrid.getCellMatrix()[x][y].getVehicle().hashCode();
-                                carDistanceToNext.setText("Odległość do następnego samochodu " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getDistanceToNextCarInFront()));
-                                carSpeed.setText("Prędkość " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getVelocity()));
-                                carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().numberOfExits));
-                                carMaxSpeed.setText("Maksymalna prędkość samochodu " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().maxVelocity));
+                                Vehicle vehicle = highwayGrid.getCellMatrix()[x][y].getVehicle();
+                                pickedCarHash = vehicle.hashCode();
+                                carDistanceToNext.setText("Odległość do następnego samochodu " + vehicle.getDistanceToNextCarInFront());
+                                carSpeed.setText("Prędkość " + String.valueOf(vehicle.getVelocity()));
+                                carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(vehicle.numberOfExits));
+                                carMaxSpeed.setText("Maksymalna prędkość samochodu " + String.valueOf(vehicle.maxVelocity));
                             }
                         });
 
