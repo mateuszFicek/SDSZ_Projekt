@@ -14,8 +14,8 @@ public class Settings {
     public Settings(){
         time = 2;
         carMaxVelocity = 3;
-        carMaxUpperVelocity = 7;
-        tirMaxVelocity = 4;
+        carMaxUpperVelocity = 5;
+        tirMaxVelocity = 3;
     }
 
     public int getTime() {
