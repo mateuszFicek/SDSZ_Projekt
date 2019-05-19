@@ -51,7 +51,7 @@ public class Simulation {
             int randomRoads = rand.nextInt(2);
             int randomRoad = rand.nextInt(2);
             int randomLane = rand.nextInt(8353);
-            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).vehicle = new Car(settings.getCarMaxVelocity(), rand.nextInt(3)+3, rand.nextInt(3) + 1);
+            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).vehicle = new Car(rand.nextInt(settings.getCarMaxUpperVelocity()-settings.getCarMaxVelocity())+settings.getCarMaxVelocity(), rand.nextInt(3)+3, rand.nextInt(3) + 1);
             highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).occupied = true;
         }
         for(int i = 0; i < highway.roads.length; ++i){

@@ -9,14 +9,14 @@ public class Car extends Vehicle {
     }
 
     public Car(int maxVelocity, int velocity, int numberOfExits){
-        super();
+        super(maxVelocity);
         this.maxVelocity = maxVelocity;
         this.velocity = velocity;
         this.numberOfExits = numberOfExits;
     }
 
     public Car(int maxVelocity){
-        super();
+        super(maxVelocity);
         this.maxVelocity = maxVelocity;
         this.velocity = 1;
         this.numberOfExits = 2;

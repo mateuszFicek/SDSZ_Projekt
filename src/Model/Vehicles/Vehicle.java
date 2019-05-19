@@ -16,17 +16,15 @@ public class Vehicle {
     public boolean hasChangedLane = false;
     public int numberOfExits;
     public int numberOfCellsToPass = 40;
+    public int numberOfCellsToOvertake = 0;
 
     public LaneToChange laneToChange = LaneToChange.NONE;
 
     public Vehicle() {
         neighbourhood = new Cell[3][11];
-//        for (int i = 0; i < neighbourhood.length; ++i) {
-//            for (int j = 0; j < neighbourhood[i].length; ++j) {
-//                neighbourhood[i][j] = new Cell();
-//            }
-//        }
-
+    }
+    public Vehicle(int maxVelocity) {
+        neighbourhood = new Cell[3][2*maxVelocity + 1];
     }
 
     public void decreaseVelocity(int velocityChange) {
@@ -84,7 +82,8 @@ public class Vehicle {
             if (velocity > vehicleInBackOnRight.velocity) {
                 laneToChange = LaneToChange.RIGHT;
                 return;
-            } else if (distanceToNextCarInBack - vehicleInBackOnRight.velocity - velocity == 0) {
+            }
+            else{
                 laneToChange = LaneToChange.NONE;
                 return;
             }
@@ -101,25 +100,21 @@ public class Vehicle {
         }
         Vehicle vehicleInBackOnLeft = calculateDistanceToNextBackVehicle(roadIndex + 1);
         Vehicle vehicleInFront = calculateDistanceToNextFrontVehicle(roadIndex);
-        if(vehicleInFront != null){
-            if(distanceToNextCarInFront < velocity){
-                laneToChange = LaneToChange.LEFT;
-                return;
-            }
-        }
-        else if (vehicleInBackOnLeft != null) {
-            if (distanceToNextCarInBack - vehicleInBackOnLeft.velocity - velocity > 0) {
-                laneToChange = LaneToChange.LEFT;
-                return;
-            } else if (distanceToNextCarInBack + vehicleInBackOnLeft.velocity - velocity == 0) {
-                laneToChange = LaneToChange.NONE;
-                return;
-            }
-        }
-
-        if(vehicleInFront == null && vehicleInBackOnLeft == null){
+        if(vehicleInFront == null){
             laneToChange = LaneToChange.NONE;
             return;
+        }
+        else{
+            if(vehicleInBackOnLeft!=null) {
+                if (vehicleInFront.velocity < velocity && vehicleInBackOnLeft.velocity < velocity) {
+                    laneToChange = LaneToChange.LEFT;
+                    return;
+                }
+            }
+            else {
+                laneToChange = LaneToChange.LEFT;
+                return;
+            }
         }
     }
 
@@ -181,22 +176,17 @@ public class Vehicle {
         if (numberOfExits > 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.EXIT) {
             if (numberOfCellsToPass == 40) {
                 numberOfExits--;
-                System.out.println(index + " ------- Jeszcze nie gotowy do zjazdu, ale powinno być 40: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits);
                 numberOfCellsToPass -= velocity;
             } else {
                 numberOfCellsToPass -= velocity;
-                System.out.println(index + " ------- Jeszcze nie gotowy do zjazdu, ale powinno być mniej: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits);
             }
         } else if (numberOfExits == 0 && neighbourhood[0][maxVelocity].cellType == Cell.CellType.EXIT) {
             System.out.println(index + " ------- Gotowy do zjazdu: " + numberOfCellsToPass + ". Ilosc zjazdow: " + numberOfExits);
-            //neighbourhood[0][maxVelocity].occupyCell(this);
-            //neighbourhood[laneIndex][maxVelocity].freeCell();
             if (laneIndex == 0)
                 laneToChange = LaneToChange.NONE;
             else
                 laneToChange = LaneToChange.RIGHT;
             decideAboutChangeLaneToRight(laneToChange, laneIndex);
-            //changeLane(laneIndex);
         } else {
             numberOfCellsToPass = 40;
         }
@@ -218,14 +208,15 @@ public class Vehicle {
 
     public int changeLane(int laneIndex) {
         if (laneToChange == LaneToChange.LEFT) {
-            neighbourhood[laneIndex + 1][5].occupyCell(this);
-            neighbourhood[laneIndex][5].freeCell();
+            neighbourhood[laneIndex + 1][maxVelocity].occupyCell(this);
+            neighbourhood[laneIndex][maxVelocity].freeCell();
             laneToChange = LaneToChange.NONE;
             hasChangedLane = true;
+            numberOfCellsToOvertake = 40;
             return laneIndex + 1;
         } else if (laneToChange == LaneToChange.RIGHT) {
-            neighbourhood[laneIndex][5].freeCell();
-            neighbourhood[laneIndex - 1][5].occupyCell(this);
+            neighbourhood[laneIndex][maxVelocity].freeCell();
+            neighbourhood[laneIndex - 1][maxVelocity].occupyCell(this);
             laneToChange = LaneToChange.NONE;
             hasChangedLane = true;
             return laneIndex - 1;
