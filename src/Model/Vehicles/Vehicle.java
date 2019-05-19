@@ -111,7 +111,7 @@ public class Vehicle {
                     return;
                 }
             }
-            else {
+            else if(vehicleInFront.velocity < velocity){
                 laneToChange = LaneToChange.LEFT;
                 return;
             }
