@@ -8,6 +8,7 @@ public class Settings {
     private int time;
     private int carMaxVelocity;
     private int tirMaxVelocity;
+    private int[] throughput = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 
     public Settings(){
         time = 2;
@@ -37,5 +38,13 @@ public class Settings {
 
     public void setTirMaxVelocity(int tirMaxVelocity) {
         this.tirMaxVelocity = tirMaxVelocity;
+    }
+
+    public int[] getThroughput() {
+        return throughput;
+    }
+
+    public void setThroughput(int[] throughput) {
+        this.throughput = throughput;
     }
 }
