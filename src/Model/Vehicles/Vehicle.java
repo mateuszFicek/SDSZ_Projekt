@@ -199,9 +199,9 @@ public class Vehicle {
         }
         hasChangedLane = false;
 //        System.out.println("---" + distanceToNextCarInFront + "---" + probability);
-        if (distanceToNextCarInFront <= velocity || (probability > 0.6 && velocity == 5)) {
+        if (distanceToNextCarInFront <= velocity || (probability > 0.9 && velocity == maxVelocity)) {
             SlowDown();
-        } else {
+        } else if(probability < 0.3){
             SpeedUp();
         }
     }
