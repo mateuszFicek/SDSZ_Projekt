@@ -47,7 +47,6 @@ public class Vehicle {
 
     public Vehicle calculateDistanceToNextFrontVehicle(int roadIndex) {
         for (int i = (neighbourhood[roadIndex].length / 2) + 1, j = 1; i < neighbourhood[roadIndex].length; i++) {
-//            System.out.println(i);
             if (!neighbourhood[roadIndex][i].occupied) {
                 distanceToNextCarInFront = j;
                 j++;
@@ -55,9 +54,8 @@ public class Vehicle {
                 distanceToNextCarInFront = j;
                 return neighbourhood[roadIndex][i].vehicle;
             }
-            distanceToNextCarInFront -= 1;
         }
-        //distanceToNextCarInFront += 1;
+        distanceToNextCarInFront += 1;
         return null;
     }
 
@@ -70,9 +68,8 @@ public class Vehicle {
                 distanceToNextCarInBack = j;
                 return neighbourhood[roadIndex][i].vehicle;
             }
-            distanceToNextCarInBack -= 1;
         }
-        //distanceToNextCarInBack += 1;
+        distanceToNextCarInBack += 1;
         return null;
     }
 
@@ -81,14 +78,13 @@ public class Vehicle {
             laneToChange = LaneToChange.NONE;
             return;
         }
-        Vehicle vehicleInBack = calculateDistanceToNextBackVehicle(roadIndex - 1);
+        Vehicle vehicleInBackOnRight = calculateDistanceToNextBackVehicle(roadIndex - 1);
         Vehicle vehicleInFront = calculateDistanceToNextFrontVehicle(roadIndex);
-        if (vehicleInBack != null) {
-            if (distanceToNextCarInBack - vehicleInBack.velocity - velocity > 0) {
+        if (vehicleInBackOnRight != null) {
+            if (velocity > vehicleInBackOnRight.velocity) {
                 laneToChange = LaneToChange.RIGHT;
                 return;
-            } else if (distanceToNextCarInBack - vehicleInBack.velocity - velocity == 0) {
-                SlowDown();
+            } else if (distanceToNextCarInBack - vehicleInBackOnRight.velocity - velocity == 0) {
                 laneToChange = LaneToChange.NONE;
                 return;
             }
@@ -103,24 +99,27 @@ public class Vehicle {
             laneToChange = LaneToChange.NONE;
             return;
         }
-        Vehicle vehicleInBack = calculateDistanceToNextBackVehicle(roadIndex - 1);
+        Vehicle vehicleInBackOnLeft = calculateDistanceToNextBackVehicle(roadIndex + 1);
         Vehicle vehicleInFront = calculateDistanceToNextFrontVehicle(roadIndex);
-        if (vehicleInBack != null) {
-            if (distanceToNextCarInBack - vehicleInBack.velocity - velocity > 0) {
+        if(vehicleInFront != null){
+            if(distanceToNextCarInFront < velocity){
                 laneToChange = LaneToChange.LEFT;
                 return;
-            } else if (distanceToNextCarInBack - vehicleInBack.velocity - velocity == 0) {
-                SlowDown();
+            }
+        }
+        else if (vehicleInBackOnLeft != null) {
+            if (distanceToNextCarInBack - vehicleInBackOnLeft.velocity - velocity > 0) {
+                laneToChange = LaneToChange.LEFT;
+                return;
+            } else if (distanceToNextCarInBack + vehicleInBackOnLeft.velocity - velocity == 0) {
                 laneToChange = LaneToChange.NONE;
                 return;
             }
         }
-        if(vehicleInFront != null){
-            if(distanceToNextCarInFront - velocity + distanceToNextCarInFront <=0 ){
-                //SpeedUp();
-                laneToChange = LaneToChange.LEFT;
-                return;
-            }
+
+        if(vehicleInFront == null && vehicleInBackOnLeft == null){
+            laneToChange = LaneToChange.NONE;
+            return;
         }
     }
 
