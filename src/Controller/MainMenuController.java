@@ -48,6 +48,7 @@ public class MainMenuController extends BaseController implements Initializable 
         OptionsController optionsController = loader.getController();
         optionsController.initSettings(super.settings);
         optionsController.initTime();
+        optionsController.initSpinners();
         window.show();
     }
 

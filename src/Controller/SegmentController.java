@@ -104,17 +104,34 @@ public class SegmentController extends BaseController {
                     y = numberOfCells - k - 1;
                 }
                 if (cell.occupied) {
-
+                    Vehicle vehicle = simulation.getHighway().roads[i].road[j].lane.get(k + Highway.startOfSegments.get(segment - 1)).vehicle;
                     if (cell.vehicle.hashCode() == pickedCarHash) {
+
                         highwayGrid.setCellMatrixColor(x, y, Color.YELLOW);
-                        highwayGrid.getCellMatrix()[x][y].setVehicle(simulation.getHighway().roads[i].road[j].lane.get(k + Highway.startOfSegments.get(segment - 1)).vehicle);
+                        highwayGrid.getCellMatrix()[x][y].setVehicle(vehicle);
+                        if (vehicle.maxVelocity == settings.getCarMaxVelocity()){
+                            try {
+                                highwayGrid.setCellMatrixColor(x, y + 1 - (2*i), Color.YELLOW);
+                                k++;
+                            }catch (ArrayIndexOutOfBoundsException ignored){
+
+                            }
+                        }
                         carDistanceToNext.setText("Odległość do następnego samochodu" + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getDistanceToNextCarInFront()));
                         carSpeed.setText("Prędkość " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getVelocity()));
                         carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().numberOfExits));
-                    } else {
-
+                    } else if (cell.vehicle.maxVelocity == settings.getCarMaxVelocity()) {
+                        highwayGrid.setCellMatrixColor(x, y, Color.ORANGE);
+                        try{
+                            highwayGrid.setCellMatrixColor(x, y+1-(2*i), Color.ORANGE);
+                            k++;
+                        }catch (ArrayIndexOutOfBoundsException ignored){
+                        }
+                        highwayGrid.getCellMatrix()[x][y].setVehicle(vehicle);
+                    }
+                    else {
                         highwayGrid.setCellMatrixColor(x, y, Color.RED);
-                        highwayGrid.getCellMatrix()[x][y].setVehicle(simulation.getHighway().roads[i].road[j].lane.get(k + Highway.startOfSegments.get(segment - 1)).vehicle);
+                        highwayGrid.getCellMatrix()[x][y].setVehicle(vehicle);
                     }
 
                     highwayGrid.getCellMatrix()[x][y].setOnMouseClicked(new EventHandler<MouseEvent>() {
