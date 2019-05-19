@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Spinner;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -30,6 +31,7 @@ public class SegmentController extends BaseController {
     public Label carSpeed;
     public Label carDistanceToNext;
     public Label carExitsRemaining;
+    public Label carMaxSpeed;
 
     private Vehicle selectedVehicle;
     private int numberOfLanes;
@@ -85,9 +87,10 @@ public class SegmentController extends BaseController {
                             @Override
                             public void handle(MouseEvent event) {
                                 pickedCarHash = highwayGrid.getCellMatrix()[x][y].getVehicle().hashCode();
-                                carDistanceToNext.setText("Odległość do następnego samochodu" + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getDistanceToNextCarInFront()));
+                                carDistanceToNext.setText("Odległość do następnego samochodu " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getDistanceToNextCarInFront()));
                                 carSpeed.setText("Prędkość " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getVelocity()));
                                 carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().numberOfExits));
+                                carMaxSpeed.setText("Maksymalna prędkość samochodu " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().maxVelocity));
                             }
                         });
 
@@ -138,7 +141,7 @@ public class SegmentController extends BaseController {
         this.highwayGrid = new HighwayGrid(numberOfRoads * numberOfLanes, numberOfCells);
         this.grid = (GridPane) highwayGrid.getGrid();
         this.scrollPane.setContent(this.grid);
-        this.segmentLabel.setText(Highway.segmentsNames[i - 1]);
+        this.segmentLabel.setText(Highway.segmentsNames[i - 1] + " -  " + Highway.segmentsNames[i%17]);
     }
 
     public void initSimulation(Simulation simulation) {
