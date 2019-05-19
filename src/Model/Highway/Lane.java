@@ -176,6 +176,9 @@ public class Lane {
                     nextFrameLane.get((currentCellVehicle.getVelocity() + i) - lane.size()).occupyCell(currentCellVehicle);
                 } else {
                     nextFrameLane.get(i + currentCellVehicle.getVelocity()).occupyCell(currentCellVehicle);
+                    if(nextFrameLane.get(i + currentCellVehicle.getVelocity()).cellType == CellType.DISABLED){
+                        nextFrameLane.get(i + currentCellVehicle.getVelocity()).freeCell();
+                    }
                 }
             }
         }
