@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import java.util.ArrayList?>
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.ConfigurationController">
+    <children>
+        <Button fx:id="backButton" layoutX="14.0" layoutY="706.0" mnemonicParsing="false" onAction="#goBackToSimulation"
+                prefHeight="48.0" prefWidth="95.0" text="Powrót"/>
+        <Label fx:id="segmentLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="14.0"
+               prefHeight="56.0" prefWidth="994.0" text="Konfiguracja Symulacji" textAlignment="CENTER">
+            <font>
+                <Font name="Arial" size="72.0"/>
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="123.0" text="Natężenie samochodów na wjeździe">
+            <font>
+                <Font name="Arial" size="28.0"/>
+            </font>
+        </Label>
+        <Spinner fx:id="entranceThroughtput1" editable="true" layoutX="166.0" layoutY="163.0"/>
+        <Spinner fx:id="entranceThroughtput2" editable="true" layoutX="166.0" layoutY="194.0"/>
+        <Spinner fx:id="entranceThroughtput3" editable="true" layoutX="166.0" layoutY="226.0"/>
+        <Spinner fx:id="entranceThroughtput4" editable="true" layoutX="166.0" layoutY="258.0"/>
+        <Spinner fx:id="entranceThroughtput5" editable="true" layoutX="166.0" layoutY="289.0"/>
+        <Spinner fx:id="entranceThroughtput6" editable="true" layoutX="166.0" layoutY="320.0"/>
+        <Spinner fx:id="entranceThroughtput7" editable="true" layoutX="166.0" layoutY="351.0"/>
+        <Spinner fx:id="entranceThroughtput8" editable="true" layoutX="166.0" layoutY="384.0"/>
+        <Spinner fx:id="entranceThroughtput9" editable="true" layoutX="166.0" layoutY="415.0"/>
+        <Spinner fx:id="entranceThroughtput10" editable="true" layoutX="166.0" layoutY="447.0"/>
+        <Spinner fx:id="entranceThroughtput11" editable="true" layoutX="166.0" layoutY="480.0"/>
+        <Spinner fx:id="entranceThroughtput12" editable="true" layoutX="166.0" layoutY="511.0"/>
+        <Spinner fx:id="entranceThroughtput13" editable="true" layoutX="166.0" layoutY="544.0"/>
+        <Spinner fx:id="entranceThroughtput14" editable="true" layoutX="166.0" layoutY="577.0"/>
+        <Spinner fx:id="entranceThroughtput15" editable="true" layoutX="166.0" layoutY="610.0"/>
+        <Spinner fx:id="entranceThroughtput16" editable="true" layoutX="166.0" layoutY="643.0"/>
+        <Spinner fx:id="entranceThroughtput17" editable="true" layoutX="166.0" layoutY="681.0"/>
+        <Label fx:id="confLabel1" alignment="CENTER" layoutX="21.0" layoutY="163.0" prefHeight="25.0" prefWidth="118.0"
+               text="Balice">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="21.0" layoutY="320.0" prefHeight="25.0" prefWidth="118.0">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel13" alignment="CENTER" layoutX="21.0" layoutY="544.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Łagiewniki">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel3" alignment="CENTER" layoutX="21.0" layoutY="226.0" prefHeight="25.0" prefWidth="118.0"
+               text="Modlniczka">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel4" alignment="CENTER" layoutX="21.0" layoutY="258.0" prefHeight="25.0" prefWidth="118.0"
+               text="Modlnica">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel5" alignment="CENTER" layoutX="21.0" layoutY="289.0" prefHeight="25.0" prefWidth="118.0"
+               text="Zielonki">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel6" alignment="CENTER" layoutX="21.0" layoutY="320.0" prefHeight="25.0" prefWidth="118.0"
+               text="Węgrzce">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel7" alignment="CENTER" layoutX="21.0" layoutY="351.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Mistrzejowice">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel8" alignment="CENTER" layoutX="21.0" layoutY="384.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Grębałów">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel9" alignment="CENTER" layoutX="21.0" layoutY="415.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Nowa Huta">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel10" alignment="CENTER" layoutX="21.0" layoutY="447.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Przewóz">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel11" alignment="CENTER" layoutX="21.0" layoutY="480.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Bieżanów">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel12" alignment="CENTER" layoutX="21.0" layoutY="511.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Wieliczka">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel14" alignment="CENTER" layoutX="21.0" layoutY="577.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Południe">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel2" alignment="CENTER" layoutX="21.0" layoutY="194.0" prefHeight="25.0" prefWidth="118.0"
+               text="Balice2">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel15" alignment="CENTER" layoutX="21.0" layoutY="610.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Skawina">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel16" alignment="CENTER" layoutX="21.0" layoutY="643.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Tyniec">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="confLabel17" alignment="CENTER" layoutX="21.0" layoutY="681.0" prefHeight="25.0" prefWidth="118.0"
+               text="Kr. Bielany">
+            <font>
+                <Font name="Arial" size="15.0"/>
+            </font>
+        </Label>
+        <fx:define>
+            <ArrayList fx:id="spinnerList">
+                <fx:reference source="entranceThroughtput1" />
+                <fx:reference source="entranceThroughtput2" />
+                <fx:reference source="entranceThroughtput3" />
+                <fx:reference source="entranceThroughtput4" />
+                <fx:reference source="entranceThroughtput5" />
+                <fx:reference source="entranceThroughtput6" />
+                <fx:reference source="entranceThroughtput7" />
+                <fx:reference source="entranceThroughtput8" />
+                <fx:reference source="entranceThroughtput9" />
+                <fx:reference source="entranceThroughtput10" />
+                <fx:reference source="entranceThroughtput11" />
+                <fx:reference source="entranceThroughtput12" />
+                <fx:reference source="entranceThroughtput13" />
+                <fx:reference source="entranceThroughtput14" />
+                <fx:reference source="entranceThroughtput15" />
+                <fx:reference source="entranceThroughtput16" />
+                <fx:reference source="entranceThroughtput17" />
+
+            </ArrayList>
+        </fx:define>
+    </children>
+</AnchorPane>

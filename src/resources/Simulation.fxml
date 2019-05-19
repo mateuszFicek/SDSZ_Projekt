@@ -145,6 +145,7 @@
             <Button layoutX="211.0" layoutY="487.0" mnemonicParsing="false" onAction="#simulateSegment15" opacity="0.0" prefHeight="88.0" prefWidth="88.0" text="Button" />
             <Button layoutX="172.0" layoutY="439.0" mnemonicParsing="false" onAction="#simulateSegment16" opacity="0.0" prefHeight="48.0" prefWidth="46.0" text="Button" />
             <Button layoutX="148.0" layoutY="278.0" mnemonicParsing="false" onAction="#simulateSegment17" opacity="0.0" prefHeight="160.0" prefWidth="38.0" text="Button" />
+            <Button fx:id="configurationButton" layoutX="132.0" layoutY="706.0" mnemonicParsing="false" onAction="#changeSceneToConfiguration" prefHeight="48.0" prefWidth="95.0" text="Konfiguracja" />
          </children>
       </AnchorPane>
    </children>
