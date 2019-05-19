@@ -12,7 +12,7 @@ public class Settings {
 
     public Settings(){
         time = 2;
-        carMaxVelocity = 5;
+        carMaxVelocity = 3;
         carMaxUpperVelocity = 7;
         tirMaxVelocity = 4;
     }

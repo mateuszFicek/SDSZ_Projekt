@@ -138,19 +138,22 @@ public class Lane {
 
                 if (laneIndex == 1) {
                     currentCar.decideAboutChangeLaneToLeft(LaneToChange.LEFT, laneIndex);
+                    currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
                 }
-                if (laneIndex == 2) {
+                if (laneIndex == 2 && currentCar.numberOfCellsToOvertake <= 0 || laneIndex == 2 && currentCar.numberOfExits == 0) {
                     currentCar.decideAboutChangeLaneToRight(LaneToChange.RIGHT, laneIndex);
                 }
+                if(laneIndex == 2)
+                    currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
 
             }
         }
         for (int i = 0; i < lane.size(); i++) {
             if (lane.get(i).occupied) {
                 Vehicle currentCar = lane.get(i).vehicle;
+                currentCar.checkExits(i, laneIndex);
                 int newIndex = currentCar.changeLane(laneIndex);
                 currentCar.calculateNextVelocity(newIndex);
-                currentCar.checkExits(i, newIndex);
             }
         }
     }
