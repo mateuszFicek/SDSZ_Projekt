@@ -18,13 +18,17 @@ public class Simulation {
 
 //       CODE FOR TESTING
         Vehicle car = new Car();
-        car.increaseVelocity(3);
+        car.increaseVelocity(5);
         Vehicle car2 = new Car();
-        highway.roads[0].road[2].lane[50].vehicle = car;
-        highway.roads[0].road[2].lane[50].occupied = true;
-        highway.roads[0].road[2].lane[53].vehicle = car2;
-        highway.roads[0].road[2].lane[53].occupied = true;
-        highway.roads[0].moveCarsNeighbourhoods(2);
+        Vehicle car3 = new Car();
+        car.increaseVelocity(0);
+        highway.roads[0].road[1].lane.get(50).vehicle = car;
+        highway.roads[0].road[1].lane.get(50).occupied = true;
+        highway.roads[0].road[1].lane.get(51).vehicle = car2;
+        highway.roads[0].road[1].lane.get(51).occupied = true;
+        highway.roads[0].road[1].lane.get(52).vehicle= car3;
+        highway.roads[0].road[1].lane.get(52).occupied = true;
+        highway.roads[0].moveCarsNeighbourhoods(1);
     }
 
     public Simulation(Settings settings){
@@ -39,7 +43,7 @@ public class Simulation {
                 startingNumberOfCars = 400;
                 break;
             case 2:
-                startingNumberOfCars = 600;
+                startingNumberOfCars = 1000;
                 break;
         }
 
@@ -47,8 +51,8 @@ public class Simulation {
             int randomRoads = rand.nextInt(2);
             int randomRoad = rand.nextInt(2);
             int randomLane = rand.nextInt(8353);
-            highway.roads[randomRoads].road[randomRoad+1].lane[randomLane].vehicle = new Car(settings.getCarMaxVelocity(), rand.nextInt(3)+3);
-            highway.roads[randomRoads].road[randomRoad+1].lane[randomLane].occupied = true;
+            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).vehicle = new Car(rand.nextInt(settings.getCarMaxUpperVelocity()-settings.getCarMaxVelocity())+settings.getCarMaxVelocity(), rand.nextInt(3)+3, rand.nextInt(3) + 1);
+            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).occupied = true;
         }
         for(int i = 0; i < highway.roads.length; ++i){
             for(int j = 0; j < highway.roads[i].road.length; ++j){

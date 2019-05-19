@@ -15,5 +15,30 @@
             <Font name="Arial" size="72.0" />
          </font>
       </Label>
+      <Label fx:id="carId" alignment="CENTER" contentDisplay="CENTER" layoutX="868.0" layoutY="104.0" prefHeight="42.0" prefWidth="79.0" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="carSpeed" alignment="CENTER" layoutX="365.0" layoutY="125.0" prefHeight="42.0" prefWidth="409.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="carDistanceToNext" alignment="CENTER" layoutX="365.0" layoutY="228.0" prefHeight="42.0" prefWidth="409.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="carExitsRemaining" alignment="CENTER" layoutX="365.0" layoutY="295.0" prefHeight="42.0" prefWidth="409.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="carMaxSpeed" alignment="CENTER" layoutX="365.0" layoutY="167.0" prefHeight="42.0" prefWidth="409.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

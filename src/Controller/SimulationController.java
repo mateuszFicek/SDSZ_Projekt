@@ -158,8 +158,8 @@ public class SimulationController extends BaseController implements Initializabl
         h.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Segment.fxml"));
 
-        Parent optionsParent = loader.load();
-        Scene simulationScene = new Scene(optionsParent);
+        Parent segmentParent = loader.load();
+        Scene simulationScene = new Scene(segmentParent);
 
         Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         window.setScene(simulationScene);
@@ -175,4 +175,21 @@ public class SimulationController extends BaseController implements Initializabl
         window.show();
     }
 
+    public void changeSceneToConfiguration(ActionEvent event) throws IOException {
+        h.stop();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Configuration.fxml"));
+
+        Parent configurationParent = loader.load();
+        Scene configurationScene = new Scene(configurationParent);
+
+        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        window.setScene(configurationScene);
+
+        ConfigurationController configurationController = loader.getController();
+        configurationController.initSettings(super.settings);
+        configurationController.initSimulation(simulation);
+        configurationController.initializeSpinners();
+
+        window.show();
+    }
 }

@@ -14,7 +14,7 @@ import Model.Vehicles.Vehicle;
 public class Lane {
     int laneNumber;
     int numberOfCarsOnLane;
-    public Cell[] lane;
+    public CircularArrayList<Cell> lane;
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
     final int cellNumber = 8353;
@@ -65,60 +65,58 @@ public class Lane {
             GrebalowWyjazd, MistrzejowiceWyjazd, WegrzceWyjazd, ZielonkiWyjazd, ModlnicaWyjazd, ModlniczkaWyjazd);
 
     public Lane() {
-        lane = new Cell[cellNumber];
-        for(int i = 0; i < cellNumber; i++) lane[i] = new Cell();
+        lane = new CircularArrayList<Cell>();
+        for (int i = 0; i < cellNumber; i++) lane.add(new Cell());
     }
 
-    public Lane(int index){
-        lane = new Cell[cellNumber];
-        for(int i = 0; i < cellNumber; i++) lane[i] = new Cell();
+    public Lane(int index) {
+        lane = new CircularArrayList<Cell>();
+        for (int i = 0; i < cellNumber; i++) lane.add(new Cell());
         this.laneNumber = index;
     }
 
     // Ustawia typ kratki na wjazd;
     public void setupEntryOneWay() {
         for (Integer point : Entries) {
-            lane[point].cellType = CellType.ENTRY;
+            lane.get(point).cellType = CellType.ENTRY;
         }
     }
 
     // Ustawia typ kratki na zjazd
     public void setupExitOneWay() {
         for (Integer point : Exits) {
-            lane[point].cellType = CellType.EXIT;
+            lane.get(point).cellType = CellType.EXIT;
         }
     }
 
     public void setupEntryOtherWay() {
         for (Integer point : Exits) {
-            lane[point].cellType = CellType.ENTRY;
+            lane.get(point).cellType = CellType.ENTRY;
         }
     }
 
     // Ustawia typ kratki na zjazd
     public void setupExitOtherWay() {
         for (Integer point : Entries) {
-            lane[point].cellType = CellType.EXIT;
+            lane.get(point).cellType = CellType.EXIT;
         }
     }
 
-    public void setupDisabled(){
-        for(int i = 0; i < cellNumber; i++){
-            if(Entries.contains(i)){
+    public void setupDisabled() {
+        for (int i = 0; i < cellNumber; i++) {
+            if (Entries.contains(i)) {
                 continue;
-            }
-            else if(Exits.contains(i)){
+            } else if (Exits.contains(i)) {
                 continue;
-            }
-            else{
-                lane[i].cellType = CellType.DISABLED;
+            } else {
+                lane.get(i).cellType = CellType.DISABLED;
             }
         }
     }
 
-    public void setupNormal(){
-        for(int i = 0; i < cellNumber; i++){
-            lane[i].cellType = CellType.NORMAL;
+    public void setupNormal() {
+        for (int i = 0; i < cellNumber; i++) {
+            lane.get(i).cellType = CellType.NORMAL;
         }
     }
 
@@ -132,47 +130,61 @@ public class Lane {
     }
 
 
-    public void calculateNextFrame()
-    {
-        for (int i=0; i<lane.length; i++) {
-            if(lane[i].occupied)
-            {
-                Vehicle currentCar = lane[i].vehicle;
-                currentCar.decideAboutLaneChange(LaneToChange.LEFT);
-                currentCar.changeLane();
-                currentCar.calculateNextVelocity();
+    public void calculateNextFrame(int laneIndex) {
+        for (int i = 0; i < lane.size(); i++) {
+            if (lane.get(i).occupied) {
+                Vehicle currentCar = lane.get(i).vehicle;
+                currentCar.calculateDistanceToNextFrontVehicle(laneIndex);
+
+                if (laneIndex == 1) {
+                    currentCar.decideAboutChangeLaneToLeft(LaneToChange.LEFT, laneIndex);
+                    currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
+                }
+                if (laneIndex == 2 && currentCar.numberOfCellsToOvertake <= 0 || laneIndex == 2 && currentCar.numberOfExits == 0) {
+                    currentCar.decideAboutChangeLaneToRight(LaneToChange.RIGHT, laneIndex);
+                }
+                if(laneIndex == 2)
+                    currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
+
+            }
+        }
+        for (int i = 0; i < lane.size(); i++) {
+            if (lane.get(i).occupied) {
+                Vehicle currentCar = lane.get(i).vehicle;
+                currentCar.checkExits(i, laneIndex);
+                int newIndex = currentCar.changeLane(laneIndex);
+                currentCar.calculateNextVelocity(newIndex);
             }
         }
     }
 
 
-    public void moveVehiclesForward()
-    {
+    public int moveVehiclesForward(int lineIndex) {
         numberOfCarsOnLane = 0;
         int segment;
-        Cell[] nextFrameLane = new Cell[cellNumber];
-        for(int i = 0; i < cellNumber; i++) nextFrameLane[i] = new Cell(lane[i].cellType);
+        CircularArrayList<Cell> nextFrameLane = new CircularArrayList<>(cellNumber);
+        for (int i = 0; i < cellNumber; i++) nextFrameLane.add(new Cell(lane.get(i).cellType));
 
-        for(int i=0; i<lane.length; i++)
-        {
-            if(lane[i].occupied)
-            {
-                numberOfCarsOnLane +=1;
+        for (int i = 0; i < lane.size(); i++) {
+            if (lane.get(i).occupied) {
+                numberOfCarsOnLane += 1;
                 segment = Highway.segmentsByCell.get(i);
-                Highway.carsOnSegment.set(segment, (Highway.carsOnSegment.get(segment)+1));
-                Vehicle currentCellVehicle = lane[i].vehicle;
-                System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity() + " Numer pasa: "+laneNumber);
-                if(currentCellVehicle.getVelocity() + i >= lane.length)
-                {
-                    nextFrameLane[(currentCellVehicle.getVelocity() +i)- lane.length].occupyCell(currentCellVehicle);
-                }
-                else{
-                    nextFrameLane[i+currentCellVehicle.getVelocity()].occupyCell(currentCellVehicle);
+                Highway.carsOnSegment.set(segment, (Highway.carsOnSegment.get(segment) + 1));
+                Vehicle currentCellVehicle = lane.get(i).vehicle;
+                //System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity() + " Numer pasa: " + laneNumber);
+                if (currentCellVehicle.getVelocity() + i >= lane.size()) {
+                    nextFrameLane.get((currentCellVehicle.getVelocity() + i) - lane.size()).occupyCell(currentCellVehicle);
+                } else {
+                    nextFrameLane.get(i + currentCellVehicle.getVelocity()).occupyCell(currentCellVehicle);
+                    if(nextFrameLane.get(i + currentCellVehicle.getVelocity()).cellType == CellType.DISABLED){
+                        nextFrameLane.get(i + currentCellVehicle.getVelocity()).freeCell();
+                    }
                 }
             }
         }
         lane = nextFrameLane;
         System.out.println(numberOfCarsOnLane);
+        return numberOfCarsOnLane;
     }
 
 }

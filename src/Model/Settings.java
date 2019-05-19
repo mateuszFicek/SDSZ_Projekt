@@ -3,15 +3,18 @@ package Model;
 public class Settings {
 
     public static boolean initialized = false;
+    private int carMaxUpperVelocity;
 
     public String[] times = new String[]{"Noc", "Poranek", "Popołudnie"};
     private int time;
     private int carMaxVelocity;
     private int tirMaxVelocity;
+    private int[] throughput = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 
     public Settings(){
         time = 2;
-        carMaxVelocity = 5;
+        carMaxVelocity = 3;
+        carMaxUpperVelocity = 7;
         tirMaxVelocity = 4;
     }
 
@@ -37,5 +40,21 @@ public class Settings {
 
     public void setTirMaxVelocity(int tirMaxVelocity) {
         this.tirMaxVelocity = tirMaxVelocity;
+    }
+
+    public int[] getThroughput() {
+        return throughput;
+    }
+
+    public void setThroughput(int[] throughput) {
+        this.throughput = throughput;
+    }
+
+    public int getCarMaxUpperVelocity() {
+        return carMaxUpperVelocity;
+    }
+
+    public void setCarMaxUpperVelocity(int carMaxUpperVelocity) {
+        this.carMaxUpperVelocity = carMaxUpperVelocity;
     }
 }

@@ -1,5 +1,6 @@
 package View;
 
+import Model.Vehicles.Vehicle;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -16,9 +17,14 @@ public class HighwayGrid {
 
     }
 
-    public void setCellMatrix(int x, int y, Color color){
+    public void setCellMatrixColor(int x, int y, Color color){
         cellMatrix[x][y] = new Cell(color, x, y);
     }
+
+    public void setCellMatrixVehicleToObserve(int x, int y, Vehicle vehicle){
+        cellMatrix[x][y].setVehicle(vehicle);
+    }
+
 
     public Cell[][] getCellMatrix() {
         return cellMatrix;
