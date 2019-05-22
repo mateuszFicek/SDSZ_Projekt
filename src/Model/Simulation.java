@@ -34,6 +34,8 @@ public class Simulation {
     public Simulation(Settings settings){
         highway = new Highway(2);
         highway.setupHighway();
+        highway.roads[0].roadThroughput = settings.getThroughput();
+        highway.roads[1].roadThroughput = settings.getThroughput();
         int numberOfCars = 4000;
         int maxVelocity;
         switch (settings.getTime()){

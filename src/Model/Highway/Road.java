@@ -16,6 +16,7 @@ public class Road {
     int numberOfCarsOnLane;
     final int cellNumber = 8353;
     int laneNumber;
+    public int[] roadThroughput;
 
     public Road(int roadWidth) {
         road = new Lane[roadWidth];
@@ -31,6 +32,7 @@ public class Road {
             int l = road[index].moveVehiclesForward(index);
             suma += l;
         }
+        road[0].enterCars(roadThroughput);
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
         }
@@ -61,4 +63,6 @@ public class Road {
             }
         }
     }
+
+
 }

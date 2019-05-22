@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import Model.Highway.Cell.CellType;
+import Model.Vehicles.Car;
 import Model.Vehicles.LaneToChange;
 import Model.Vehicles.Vehicle;
 
@@ -17,6 +18,7 @@ public class Lane {
     public CircularArrayList<Cell> lane;
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
+    int entryCounter = 0;
     final int cellNumber = 8353;
 
 
@@ -185,6 +187,25 @@ public class Lane {
         lane = nextFrameLane;
         System.out.println(numberOfCarsOnLane);
         return numberOfCarsOnLane;
+    }
+
+    public void enterCars(int[] roadThroughput)
+    {
+        Random probability = new Random();
+        for(int i =0; i<cellNumber;i++)
+        {
+
+            if(lane.get(i).cellType == CellType.ENTRY)
+            {
+                if(probability.nextDouble() <= 0.5 && !lane.get(i).occupied) {
+                    roadThroughput[entryCounter]= roadThroughput[entryCounter]--;
+                    lane.get(i).occupyCell( new Car(probability.nextInt(6)+1, 2, probability.nextInt(6) + 1));
+                }
+                i+=39;
+                entryCounter++;
+            }
+        }
+        entryCounter = 0;
     }
 
 }
