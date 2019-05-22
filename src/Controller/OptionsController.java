@@ -1,10 +1,7 @@
 package Controller;
 
 import Model.Settings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +32,7 @@ public class OptionsController extends BaseController implements Initializable {
         System.out.println(this.settings);
     }
 
-    protected void initTime(){
+    protected void initTime() {
         timeBox.setItems(FXCollections.observableArrayList("Noc", "Poranek", "Popołudnie"));
         timeBox.setValue(settings.times[settings.getTime()]);
     }
@@ -47,8 +44,9 @@ public class OptionsController extends BaseController implements Initializable {
 
         });
     }
-    public void initSpinners(){
-        tirMaxVelocity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,3, settings.getCarMaxVelocity()));
+
+    public void initSpinners() {
+        tirMaxVelocity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 3, settings.getCarMaxVelocity()));
         carMaxVelocity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 7, settings.getCarMaxUpperVelocity()));
     }
 

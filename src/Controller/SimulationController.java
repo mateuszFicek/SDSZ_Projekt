@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 public class SimulationController extends BaseController implements Initializable {
     public Button backButton;
 
-    public Label simLabel;
     public Button magicStartButton;
 
     public Simulation simulation;
@@ -56,7 +55,7 @@ public class SimulationController extends BaseController implements Initializabl
         System.out.println(this.settings);
     }
 
-    protected void initSimulation() {
+    void initSimulation() {
         this.simulation = new Simulation(settings);
     }
 
