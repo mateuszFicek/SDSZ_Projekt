@@ -35,18 +35,17 @@ public class SegmentController extends BaseController {
     public Label carMaxSpeed;
 
 
-    private Vehicle selectedVehicle;
+
     private int numberOfLanes;
     private int numberOfCells;
-    private int numberOfRoads;
     private int segment;
-    public int pickedCarHash;
+    private int pickedCarHash;
 
-    public HighwayGrid highwayGridOne;
-    public HighwayGrid highwayGridTwo;
+    private HighwayGrid highwayGridOne;
+    private HighwayGrid highwayGridTwo;
     public ScrollPane scrollPane;
     public ScrollPane scrollPane2;
-    Simulation simulation;
+    private Simulation simulation;
 
     AnimationTimer h = new AnimationTimer() {
         int i = 0;
@@ -104,7 +103,7 @@ public class SegmentController extends BaseController {
                     y = numberOfCells - k - 1;
                 }
                 if (cell.occupied) {
-                    Vehicle vehicle = simulation.getHighway().roads[i].road[j].lane.get(k + Highway.startOfSegments.get(segment - 1)).vehicle;
+                    Vehicle vehicle = cell.vehicle;
                     if (cell.vehicle.hashCode() == pickedCarHash) {
 
                         highwayGrid.setCellMatrixColor(x, y, Color.YELLOW);
@@ -117,9 +116,9 @@ public class SegmentController extends BaseController {
 
                             }
                         }
-                        carDistanceToNext.setText("Odległość do następnego samochodu" + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getDistanceToNextCarInFront()));
-                        carSpeed.setText("Prędkość " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().getVelocity()));
-                        carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(highwayGrid.getCellMatrix()[x][y].getVehicle().numberOfExits));
+                        carDistanceToNext.setText("Odległość do następnego samochodu" + String.valueOf(vehicle.getDistanceToNextCarInFront()));
+                        carSpeed.setText("Prędkość " + String.valueOf(vehicle.getVelocity()));
+                        carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(vehicle.numberOfExits));
                     } else if (cell.vehicle.maxVelocity == settings.getCarMaxVelocity()) {
                         highwayGrid.setCellMatrixColor(x, y, Color.ORANGE);
                         try{
@@ -134,16 +133,13 @@ public class SegmentController extends BaseController {
                         highwayGrid.getCellMatrix()[x][y].setVehicle(vehicle);
                     }
 
-                    highwayGrid.getCellMatrix()[x][y].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            Vehicle vehicle = highwayGrid.getCellMatrix()[x][y].getVehicle();
-                            pickedCarHash = vehicle.hashCode();
-                            carDistanceToNext.setText("Odległość do następnego samochodu " + vehicle.getDistanceToNextCarInFront());
-                            carSpeed.setText("Prędkość " + String.valueOf(vehicle.getVelocity()));
-                            carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(vehicle.numberOfExits));
-                            carMaxSpeed.setText("Maksymalna prędkość samochodu " + String.valueOf(vehicle.maxVelocity));
-                        }
+                    highwayGrid.getCellMatrix()[x][y].setOnMouseClicked(event -> {
+                        Vehicle vehicle1 = highwayGrid.getCellMatrix()[x][y].getVehicle();
+                        pickedCarHash = vehicle1.hashCode();
+                        carDistanceToNext.setText("Odległość do następnego samochodu " + vehicle1.getDistanceToNextCarInFront());
+                        carSpeed.setText("Prędkość " + String.valueOf(vehicle1.getVelocity()));
+                        carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(vehicle1.numberOfExits));
+                        carMaxSpeed.setText("Maksymalna prędkość samochodu " + String.valueOf(vehicle1.maxVelocity));
                     });
 
                 } else if (cell.cellType == Cell.CellType.DISABLED) {
@@ -185,24 +181,13 @@ public class SegmentController extends BaseController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.scrollPane.hvalueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                scrollPane2.setHvalue((Double) newValue);
-            }
-        });
-        this.scrollPane2.hvalueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                scrollPane.setHvalue((Double) newValue);
-            }
-        });
+        this.scrollPane.hvalueProperty().addListener((observable, oldValue, newValue) -> scrollPane2.setHvalue((Double) newValue));
+        this.scrollPane2.hvalueProperty().addListener((observable, oldValue, newValue) -> scrollPane.setHvalue((Double) newValue));
 
     }
 
     public void initSegment(int i) {
         this.segment = i;
-        this.numberOfRoads = this.simulation.getHighway().roads.length;
         this.numberOfLanes = this.simulation.getHighway().roads[0].road.length;
         this.numberOfCells = Highway.segmentsLen.get(i - 1);
         this.highwayGridOne = new HighwayGrid(numberOfLanes, numberOfCells);
