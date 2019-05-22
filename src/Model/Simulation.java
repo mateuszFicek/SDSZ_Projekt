@@ -34,16 +34,17 @@ public class Simulation {
     public Simulation(Settings settings){
         highway = new Highway(2);
         highway.setupHighway();
-
+        int numberOfCars = 4000;
+        int maxVelocity;
         switch (settings.getTime()){
             case 0:
-                startingNumberOfCars = 200;
+                startingNumberOfCars = (int) (0.10*numberOfCars);
                 break;
             case 1:
-                startingNumberOfCars = 400;
+                startingNumberOfCars = (int) (0.30*numberOfCars);
                 break;
             case 2:
-                startingNumberOfCars = 1000;
+                startingNumberOfCars = (int) (0.6*numberOfCars);
                 break;
         }
 
@@ -51,7 +52,17 @@ public class Simulation {
             int randomRoads = rand.nextInt(2);
             int randomRoad = rand.nextInt(2);
             int randomLane = rand.nextInt(8353);
-            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).vehicle = new Car(rand.nextInt(settings.getCarMaxUpperVelocity()-settings.getCarMaxVelocity())+settings.getCarMaxVelocity(), rand.nextInt(3)+3, rand.nextInt(3) + 1);
+
+            //max velocity definition
+            //tirs to cars are about 1:5
+            int randomNumber = rand.nextInt(6);
+            if (randomNumber == 0){
+                maxVelocity = settings.getCarMaxVelocity();
+            }
+            else {
+                maxVelocity = rand.nextInt(settings.getCarMaxUpperVelocity()-settings.getCarMaxVelocity()-1)+settings.getCarMaxVelocity()+1;
+            }
+            highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).vehicle = new Car(maxVelocity, rand.nextInt(maxVelocity-2)+2, rand.nextInt(6) + 1);
             highway.roads[randomRoads].road[randomRoad+1].lane.get(randomLane).occupied = true;
         }
         for(int i = 0; i < highway.roads.length; ++i){
