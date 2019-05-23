@@ -1,6 +1,5 @@
 package Model.Vehicles;
 
-public enum LaneToChange
-{
-    LEFT,NONE,RIGHT
+public enum LaneToChange {
+    LEFT, NONE, RIGHT
 }

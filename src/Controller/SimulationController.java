@@ -43,7 +43,6 @@ public class SimulationController extends BaseController implements Initializabl
 
                 }
                 updateLabelsText();
-                Highway.printCarsBySegment();
             }
             i += 1;
         }

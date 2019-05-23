@@ -2,8 +2,6 @@ package Model.Highway;
 
 import Model.Vehicles.Vehicle;
 
-//Na kratce moze znajdowac sie pojazd
-
 public class Cell {
 
     public enum CellType {
@@ -19,7 +17,7 @@ public class Cell {
         setOccupied(false);
     }
 
-    public Cell(CellType type){
+    public Cell(CellType type) {
         setOccupied(false);
         cellType = type;
     }

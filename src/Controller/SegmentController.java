@@ -35,7 +35,6 @@ public class SegmentController extends BaseController {
     public Label carMaxSpeed;
 
 
-
     private int numberOfLanes;
     private int numberOfCells;
     private int segment;
@@ -59,7 +58,6 @@ public class SegmentController extends BaseController {
                 }
                 updateGridNumberOne();
                 updateGridNumberTwo();
-                Highway.printCarsBySegment();
             }
             i += 1;
         }
@@ -96,9 +94,7 @@ public class SegmentController extends BaseController {
                 if (i == 0) {
                     x = (j * (1 - i) + ((2 - j) * i));
                     y = k;
-                }
-                else
-                {
+                } else {
                     x = (j * (1 - i) + ((2 - j) * i));
                     y = numberOfCells - k - 1;
                 }
@@ -108,11 +104,11 @@ public class SegmentController extends BaseController {
 
                         highwayGrid.setCellMatrixColor(x, y, Color.YELLOW);
                         highwayGrid.getCellMatrix()[x][y].setVehicle(vehicle);
-                        if (vehicle.maxVelocity == settings.getCarMaxVelocity()){
+                        if (vehicle.maxVelocity == settings.getCarMaxVelocity()) {
                             try {
-                                highwayGrid.setCellMatrixColor(x, y + 1 - (2*i), Color.YELLOW);
+                                highwayGrid.setCellMatrixColor(x, y + 1 - (2 * i), Color.YELLOW);
                                 k++;
-                            }catch (ArrayIndexOutOfBoundsException ignored){
+                            } catch (ArrayIndexOutOfBoundsException ignored) {
 
                             }
                         }
@@ -121,14 +117,13 @@ public class SegmentController extends BaseController {
                         carExitsRemaining.setText("Pozostałe zjazdy " + String.valueOf(vehicle.numberOfExits));
                     } else if (cell.vehicle.maxVelocity == settings.getCarMaxVelocity()) {
                         highwayGrid.setCellMatrixColor(x, y, Color.ORANGE);
-                        try{
-                            highwayGrid.setCellMatrixColor(x, y+1-(2*i), Color.ORANGE);
+                        try {
+                            highwayGrid.setCellMatrixColor(x, y + 1 - (2 * i), Color.ORANGE);
                             k++;
-                        }catch (ArrayIndexOutOfBoundsException ignored){
+                        } catch (ArrayIndexOutOfBoundsException ignored) {
                         }
                         highwayGrid.getCellMatrix()[x][y].setVehicle(vehicle);
-                    }
-                    else {
+                    } else {
                         highwayGrid.setCellMatrixColor(x, y, Color.RED);
                         highwayGrid.getCellMatrix()[x][y].setVehicle(vehicle);
                     }
@@ -153,10 +148,9 @@ public class SegmentController extends BaseController {
                 }
             }
         }
-        if (i == 0){
+        if (i == 0) {
             highwayGridOne = highwayGrid;
-        }
-        else {
+        } else {
             highwayGridTwo = highwayGrid;
         }
     }

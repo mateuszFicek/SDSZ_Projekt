@@ -1,21 +1,11 @@
 package Model.Highway;
 
 //Jezdnia sklada sie z 3 pasow
-//
 
-import Model.Vehicles.LaneToChange;
 import Model.Vehicles.Vehicle;
-import Model.Vehicles.Car;
-
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Road {
     public Lane[] road;
-    int numberOfCarsOnLane;
-    final int cellNumber = 8353;
-    int laneNumber;
     public int[] roadThroughput;
 
     public Road(int roadWidth) {
@@ -29,15 +19,13 @@ public class Road {
             road[index].calculateNextFrame(index);
         }
         for (int index = 0; index < road.length; index++) {
-            int l = road[index].moveVehiclesForward(index);
+            int l = road[index].moveVehiclesForward();
             suma += l;
         }
         road[0].enterCars(roadThroughput);
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
         }
-        System.out.println("SUMA NA WSZYSTKICH: " + suma);
-        System.out.println("--------------------------------------------------------------");
     }
 
     public void moveCarsNeighbourhoods(int laneIndex) {
@@ -63,6 +51,4 @@ public class Road {
             }
         }
     }
-
-
 }
