@@ -4,9 +4,12 @@ package Model.Highway;
 
 import Model.Vehicles.Vehicle;
 
+import java.util.Random;
+
 public class Road {
     public Lane[] road;
     public int[] roadThroughput;
+    private Random probability = new Random();
 
     public Road(int roadWidth) {
         road = new Lane[roadWidth];
@@ -25,7 +28,9 @@ public class Road {
             suma += l;
         }
 
-        road[0].enterCars(roadThroughput);
+        if(probability.nextDouble() < 0.3) {
+            road[0].enterCars(roadThroughput);
+        }
 
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);

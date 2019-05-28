@@ -153,6 +153,10 @@ public class Lane {
         for (int i = 0; i < lane.size(); i++) {
             if (lane.get(i).occupied) {
                 Vehicle currentCar = lane.get(i).vehicle;
+                if(laneIndex == 0 && currentCar.hasEntered)
+                {
+                    currentCar.decideAboutChangeLaneToRight(laneIndex);
+                }
                 currentCar.checkExits(laneIndex);
                 int newIndex = currentCar.changeLane(laneIndex);
                 currentCar.calculateNextVelocity(newIndex);
@@ -203,6 +207,7 @@ public class Lane {
                             roadThroughput[entryCounter] += 10;
                         }
                         Car toAdd = new Car(probability.nextInt(6) + 1, 2, probability.nextInt(6) + 1);
+                        toAdd.hasEntered = true;
                         lane.get(i).occupyCell(toAdd);
                     }
 

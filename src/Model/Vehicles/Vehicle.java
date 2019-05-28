@@ -11,6 +11,7 @@ public class Vehicle {
     protected int distanceToNextCarInFront = 0;
     protected int distanceToNextCarInBack = 0;
     public boolean hasChangedLane = false;
+    public boolean hasEntered = false;
     public int numberOfExits;
     public int numberOfCellsToPass = 40;
     public int numberOfCellsToOvertake = 0;
@@ -151,6 +152,8 @@ public class Vehicle {
             neighbourhood[laneIndex][maxVelocity].freeCell();
             laneToChange = LaneToChange.NONE;
             hasChangedLane = true;
+            if(hasEntered)
+                hasEntered = false;
             numberOfCellsToOvertake = 40;
             return laneIndex + 1;
         } else if (laneToChange == LaneToChange.RIGHT) {
