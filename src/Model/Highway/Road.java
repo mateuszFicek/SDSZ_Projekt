@@ -25,17 +25,22 @@ public class Road {
 
     public void generateNextFrame() {
         int suma = 0;
+
         for (int index = 0; index < road.length; index++) {
             road[index].calculateNextFrame(index);
         }
+
         for (int index = 0; index < road.length; index++) {
             int l = road[index].moveVehiclesForward(index);
             suma += l;
         }
+
         road[0].enterCars(roadThroughput);
+
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
         }
+
         System.out.println("SUMA NA WSZYSTKICH: " + suma);
         System.out.println("--------------------------------------------------------------");
     }

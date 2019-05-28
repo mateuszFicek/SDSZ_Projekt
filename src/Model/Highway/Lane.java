@@ -195,13 +195,22 @@ public class Lane {
         for(int i =0; i<cellNumber;i++)
         {
 
-            if(lane.get(i).cellType == CellType.ENTRY)
-            {
-                if(probability.nextDouble() <= 0.5 && !lane.get(i).occupied) {
-                    roadThroughput[entryCounter]= roadThroughput[entryCounter]--;
-                    lane.get(i).occupyCell( new Car(probability.nextInt(6)+1, 2, probability.nextInt(6) + 1));
+            if(lane.get(i).cellType == CellType.ENTRY) {
+                if (!lane.get(i).occupied) {
+
+                    if (probability.nextDouble() <= 0.5 && !lane.get(i).occupied) {
+                        if (roadThroughput[entryCounter] > 0) {
+                            roadThroughput[entryCounter] = roadThroughput[entryCounter]--;
+                        }
+                        if (roadThroughput[entryCounter] == 0 && probability.nextDouble() < 0.3) {
+                            roadThroughput[entryCounter] += 10;
+                        }
+                        Car toAdd = new Car(probability.nextInt(6) + 1, 2, probability.nextInt(6) + 1);
+                        lane.get(i).occupyCell(toAdd);
+                    }
+
                 }
-                i+=39;
+                i += 40;
                 entryCounter++;
             }
         }
