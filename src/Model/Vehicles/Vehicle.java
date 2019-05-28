@@ -137,7 +137,6 @@ public class Vehicle {
     public void enterHighway()
     {
         int cellsOfEnterWayLeft;
-        decideAboutChangeLaneToLeft(0);
         if(laneToChange == LaneToChange.NONE)
         {
             cellsOfEnterWayLeft=0;
@@ -151,7 +150,7 @@ public class Vehicle {
             }
             if(cellsOfEnterWayLeft< velocity)
             {
-                SlowDown();
+                AvoidCollision(cellsOfEnterWayLeft);
                 disabled = true;
             }
 
@@ -161,6 +160,22 @@ public class Vehicle {
             disabled = false;
         }
     }
+
+    public void decideAboutEnter()
+    {
+        Vehicle vehicleInTheBack= calculateDistanceToNextBackVehicle(1);
+        if(vehicleInTheBack == null || vehicleInTheBack.velocity < velocity)
+        {
+            laneToChange =LaneToChange.LEFT;
+        }
+        else
+        {
+            laneToChange = LaneToChange.NONE;
+        }
+
+
+    }
+
     public void calculateNextVelocity(int roadIndex) {
         double probability = new Random().nextDouble();
         if (hasChangedLane) {
@@ -201,5 +216,10 @@ public class Vehicle {
 
     private void SlowDown() {
         velocity = Math.max(Math.min(velocity - 1, distanceToNextCarInFront - 1), 0);
+    }
+
+    private void AvoidCollision(int distanceToCollision)
+    {
+        velocity = Math.max(Math.min(velocity-1, distanceToCollision-1), 0);
     }
 }
