@@ -17,11 +17,11 @@ public class HighwayGrid {
 
     }
 
-    public void setCellMatrixColor(int x, int y, Color color){
+    public void setCellMatrixColor(int x, int y, Color color) {
         cellMatrix[x][y] = new Cell(color, x, y);
     }
 
-    public void setCellMatrixVehicleToObserve(int x, int y, Vehicle vehicle){
+    public void setCellMatrixVehicleToObserve(int x, int y, Vehicle vehicle) {
         cellMatrix[x][y].setVehicle(vehicle);
     }
 
@@ -36,14 +36,10 @@ public class HighwayGrid {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 cellsCreator[i][j] = new Cell(Color.RED, i, j);
-
             }
-
         }
 
         this.cellMatrix = cellsCreator;
-
-
     }
 
     public Parent getGrid() {

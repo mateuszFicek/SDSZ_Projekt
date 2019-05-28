@@ -139,13 +139,13 @@ public class Lane {
                 currentCar.calculateDistanceToNextFrontVehicle(laneIndex);
 
                 if (laneIndex == 1) {
-                    currentCar.decideAboutChangeLaneToLeft(LaneToChange.LEFT, laneIndex);
+                    currentCar.decideAboutChangeLaneToLeft(laneIndex);
                     currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
                 }
                 if (laneIndex == 2 && currentCar.numberOfCellsToOvertake <= 0 || laneIndex == 2 && currentCar.numberOfExits == 0) {
-                    currentCar.decideAboutChangeLaneToRight(LaneToChange.RIGHT, laneIndex);
+                    currentCar.decideAboutChangeLaneToRight(laneIndex);
                 }
-                if(laneIndex == 2)
+                if (laneIndex == 2)
                     currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
 
             }
@@ -153,7 +153,7 @@ public class Lane {
         for (int i = 0; i < lane.size(); i++) {
             if (lane.get(i).occupied) {
                 Vehicle currentCar = lane.get(i).vehicle;
-                currentCar.checkExits(i, laneIndex);
+                currentCar.checkExits(laneIndex);
                 int newIndex = currentCar.changeLane(laneIndex);
                 currentCar.calculateNextVelocity(newIndex);
             }
@@ -161,7 +161,7 @@ public class Lane {
     }
 
 
-    public int moveVehiclesForward(int lineIndex) {
+    public int moveVehiclesForward() {
         numberOfCarsOnLane = 0;
         int segment;
         CircularArrayList<Cell> nextFrameLane = new CircularArrayList<>(cellNumber);
@@ -173,24 +173,21 @@ public class Lane {
                 segment = Highway.segmentsByCell.get(i);
                 Highway.carsOnSegment.set(segment, (Highway.carsOnSegment.get(segment) + 1));
                 Vehicle currentCellVehicle = lane.get(i).vehicle;
-                //System.out.println("Linia:" + i + " Prędkość:" + currentCellVehicle.getVelocity() + " Numer pasa: " + laneNumber);
                 if (currentCellVehicle.getVelocity() + i >= lane.size()) {
                     nextFrameLane.get((currentCellVehicle.getVelocity() + i) - lane.size()).occupyCell(currentCellVehicle);
                 } else {
                     nextFrameLane.get(i + currentCellVehicle.getVelocity()).occupyCell(currentCellVehicle);
-                    if(nextFrameLane.get(i + currentCellVehicle.getVelocity()).cellType == CellType.DISABLED){
+                    if (nextFrameLane.get(i + currentCellVehicle.getVelocity()).cellType == CellType.DISABLED) {
                         nextFrameLane.get(i + currentCellVehicle.getVelocity()).freeCell();
                     }
                 }
             }
         }
         lane = nextFrameLane;
-        System.out.println(numberOfCarsOnLane);
         return numberOfCarsOnLane;
     }
 
-    public void enterCars(int[] roadThroughput)
-    {
+    public void enterCars(int[] roadThroughput) {
         Random probability = new Random();
         for(int i =0; i<cellNumber;i++)
         {

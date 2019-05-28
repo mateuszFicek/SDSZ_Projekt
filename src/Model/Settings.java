@@ -11,7 +11,7 @@ public class Settings {
     private int tirMaxVelocity;
     private int[] throughput = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 
-    public Settings(){
+    public Settings() {
         time = 2;
         carMaxVelocity = 3;
         carMaxUpperVelocity = 5;

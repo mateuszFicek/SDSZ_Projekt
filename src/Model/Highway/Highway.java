@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Highway {
     public Road[] roads;
-
     private int numberOfSegments = 17;
 
     public static List<Integer> carsOnSegment = new ArrayList<>(Collections.nCopies(17, 0));
@@ -39,8 +38,6 @@ public class Highway {
         roads[0].road[2].setupNormal();
         roads[1].road[1].setupNormal();
         roads[1].road[2].setupNormal();
-        //Setup rozmiarów odcinków
-
     }
 
     public void setupSegments() {
@@ -60,12 +57,6 @@ public class Highway {
     public static void resetNumbersOfCarOnSegments() {
         for (int number = 0; number < carsOnSegment.size(); ++number) {
             carsOnSegment.set(number, 0);
-        }
-    }
-
-    public static void printCarsBySegment() {
-        for (int x : carsOnSegment) {
-            System.out.print(x + ", ");
         }
     }
 }
