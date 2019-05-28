@@ -147,6 +147,12 @@ public class Lane {
                 }
                 if (laneIndex == 2)
                     currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
+                if (laneIndex == 0)
+                    currentCar.numberOfCellsToOvertake -= currentCar.getVelocity();
+                if (laneIndex == 0 && currentCar.numberOfCellsToOvertake <=0 && currentCar.hasEntered)
+                {
+                    currentCar.decideAboutChangeLaneToLeft(laneIndex);
+                }
 
             }
         }
@@ -155,11 +161,12 @@ public class Lane {
                 Vehicle currentCar = lane.get(i).vehicle;
                 if(laneIndex == 0 && currentCar.hasEntered)
                 {
-                    currentCar.decideAboutChangeLaneToRight(laneIndex);
+                    currentCar.enterHighway();
                 }
                 currentCar.checkExits(laneIndex);
                 int newIndex = currentCar.changeLane(laneIndex);
-                currentCar.calculateNextVelocity(newIndex);
+                if(!currentCar.disabled)
+                    currentCar.calculateNextVelocity(newIndex);
             }
         }
     }
@@ -208,6 +215,7 @@ public class Lane {
                         }
                         Car toAdd = new Car(probability.nextInt(6) + 1, 2, probability.nextInt(6) + 1);
                         toAdd.hasEntered = true;
+                        toAdd.numberOfCellsToOvertake = 40;
                         lane.get(i).occupyCell(toAdd);
                     }
 

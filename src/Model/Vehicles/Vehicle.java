@@ -12,6 +12,7 @@ public class Vehicle {
     protected int distanceToNextCarInBack = 0;
     public boolean hasChangedLane = false;
     public boolean hasEntered = false;
+    public boolean disabled = false;
     public int numberOfExits;
     public int numberOfCellsToPass = 40;
     public int numberOfCellsToOvertake = 0;
@@ -133,6 +134,33 @@ public class Vehicle {
         }
     }
 
+    public void enterHighway()
+    {
+        int cellsOfEnterWayLeft;
+        decideAboutChangeLaneToLeft(0);
+        if(laneToChange == LaneToChange.NONE)
+        {
+            cellsOfEnterWayLeft=0;
+            for(int i = (neighbourhood[0].length / 2) + 1; i<neighbourhood[0].length; i++)
+            {
+                if(neighbourhood[0][i].cellType == Cell.CellType.DISABLED)
+                {
+                    break;
+                }
+                cellsOfEnterWayLeft++;
+            }
+            if(cellsOfEnterWayLeft< velocity)
+            {
+                SlowDown();
+                disabled = true;
+            }
+
+        }
+        if(laneToChange == LaneToChange.LEFT)
+        {
+            disabled = false;
+        }
+    }
     public void calculateNextVelocity(int roadIndex) {
         double probability = new Random().nextDouble();
         if (hasChangedLane) {
