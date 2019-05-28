@@ -18,6 +18,7 @@ public class Lane {
     public CircularArrayList<Cell> lane;
     int exitLength = 40;
     int spaceBetweenExitAndEntry = 20;
+    public int[] optionsThroughput;
     int entryCounter = 0;
     final int cellNumber = 8353;
 
@@ -210,7 +211,7 @@ public class Lane {
                             roadThroughput[entryCounter] = roadThroughput[entryCounter]--;
                         }
                         if (roadThroughput[entryCounter] == 0 && probability.nextDouble() < 0.3) {
-                            roadThroughput[entryCounter] += 10;
+                            roadThroughput[entryCounter] += optionsThroughput[i];
                         }
                         Car toAdd = new Car(probability.nextInt(4) + 3, 2, probability.nextInt(6) + 1);
                         toAdd.hasEntered = true;

@@ -195,8 +195,10 @@ public class Vehicle {
             neighbourhood[laneIndex][maxVelocity].freeCell();
             laneToChange = LaneToChange.NONE;
             hasChangedLane = true;
-            if(hasEntered)
+            if(hasEntered) {
                 hasEntered = false;
+                disabled = false;
+            }
             numberOfCellsToOvertake = 40;
             return laneIndex + 1;
         } else if (laneToChange == LaneToChange.RIGHT) {
