@@ -78,7 +78,7 @@ public class ConfigurationController extends BaseController {
 
     public void initializeSpinners() {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            spinnerList.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, settings.getThroughput()[i]));
+            spinnerList.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 60, settings.getThroughput()[i]));
             spinnerList.get(i).setTooltip(new Tooltip("Ilość samochodów na minutę"));
         }
     }
