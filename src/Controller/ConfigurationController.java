@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Settings;
 import Model.Simulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,7 +38,6 @@ public class ConfigurationController extends BaseController {
     public Spinner<Integer> entranceThroughtput17;
     private Simulation simulation;
 
-    private int[] throughput = new int[17];
     @FXML
     private List<Spinner<Integer>> spinnerList;
 
@@ -48,8 +48,7 @@ public class ConfigurationController extends BaseController {
 
     public void goBackToSimulation(ActionEvent event) throws IOException {
 
-        getThroughputValues();
-        settings.setThroughput(throughput);
+        setThroughputValues();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Simulation.fxml"));
 
@@ -67,9 +66,9 @@ public class ConfigurationController extends BaseController {
         window.show();
     }
 
-    private void getThroughputValues() {
+    private void setThroughputValues() {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            throughput[i] = spinnerList.get(i).getValue();
+            Settings.throughput[i] = spinnerList.get(i).getValue();
         }
     }
 

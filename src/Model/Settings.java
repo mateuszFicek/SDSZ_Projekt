@@ -3,13 +3,13 @@ package Model;
 public class Settings {
 
     public static boolean initialized = false;
-    private int carMaxUpperVelocity;
+    public static int carMaxUpperVelocity;
 
     public String[] times = new String[]{"Noc", "Poranek", "Popołudnie"};
     private int time;
-    private int carMaxVelocity;
-    private int tirMaxVelocity;
-    private int[] throughput = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+    public static int carMaxVelocity;
+    public static int tirMaxVelocity;
+    public static int[] throughput = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 
     public Settings() {
         time = 2;
@@ -31,7 +31,7 @@ public class Settings {
     }
 
     public void setCarMaxVelocity(int carMaxVelocity) {
-        this.carMaxVelocity = carMaxVelocity;
+        Settings.carMaxVelocity = carMaxVelocity;
     }
 
     public int getTirMaxVelocity() {
@@ -39,15 +39,11 @@ public class Settings {
     }
 
     public void setTirMaxVelocity(int tirMaxVelocity) {
-        this.tirMaxVelocity = tirMaxVelocity;
+        Settings.tirMaxVelocity = tirMaxVelocity;
     }
 
     public int[] getThroughput() {
         return throughput;
-    }
-
-    public void setThroughput(int[] throughput) {
-        this.throughput = throughput;
     }
 
     public int getCarMaxUpperVelocity() {
@@ -55,6 +51,6 @@ public class Settings {
     }
 
     public void setCarMaxUpperVelocity(int carMaxUpperVelocity) {
-        this.carMaxUpperVelocity = carMaxUpperVelocity;
+        Settings.carMaxUpperVelocity = carMaxUpperVelocity;
     }
 }
