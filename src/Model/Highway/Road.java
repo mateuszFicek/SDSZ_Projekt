@@ -28,9 +28,9 @@ public class Road {
             suma += l;
         }
 
-        if(probability.nextDouble() < 0.3) {
-            road[0].enterCars(roadThroughput);
-        }
+
+        road[0].enterCars();
+
 
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);

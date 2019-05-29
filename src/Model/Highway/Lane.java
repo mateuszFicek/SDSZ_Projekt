@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import Model.Highway.Cell.CellType;
+import Model.Settings;
 import Model.Vehicles.Car;
 import Model.Vehicles.LaneToChange;
 import Model.Vehicles.Vehicle;
@@ -198,7 +199,8 @@ public class Lane {
         return numberOfCarsOnLane;
     }
 
-    public void enterCars(int[] roadThroughput) {
+    public void enterCars() {
+        int [] roadThroughput = Settings.throughput.clone();
         Random probability = new Random();
         for(int i =0; i<cellNumber;i++)
         {
@@ -206,14 +208,16 @@ public class Lane {
             if(lane.get(i).cellType == CellType.ENTRY) {
                 if (!lane.get(i).occupied) {
 
-                    if (probability.nextDouble() <= 0.5 && !lane.get(i).occupied) {
-                        if (roadThroughput[entryCounter] > 0) {
-                            roadThroughput[entryCounter] = roadThroughput[entryCounter]--;
+                    if (probability.nextInt(61) - roadThroughput[entryCounter] < 0 && !lane.get(i).occupied) {
+                        int maxVelocity;
+                        int randomNumber = probability.nextInt(6);
+                        if (randomNumber == 0) {
+                            maxVelocity = Settings.carMaxVelocity;
+                        } else {
+                            maxVelocity = probability.nextInt(Settings.carMaxUpperVelocity - Settings.carMaxVelocity - 1) + Settings.carMaxVelocity + 1;
                         }
-                        if (roadThroughput[entryCounter] == 0 && probability.nextDouble() < 0.3) {
-                            roadThroughput[entryCounter] += optionsThroughput[i];
-                        }
-                        Car toAdd = new Car(probability.nextInt(4) + 3, 2, probability.nextInt(6) + 1);
+
+                        Car toAdd = new Car(maxVelocity, probability.nextInt(maxVelocity - 2) + 2, probability.nextInt(6) + 1);
                         toAdd.hasEntered = true;
                         toAdd.numberOfCellsToOvertake = 40;
                         lane.get(i).occupyCell(toAdd);
