@@ -214,7 +214,7 @@ public class Lane {
                         if (randomNumber == 0) {
                             maxVelocity = Settings.carMaxVelocity;
                         } else {
-                            maxVelocity = probability.nextInt(Settings.carMaxUpperVelocity - Settings.carMaxVelocity - 1) + Settings.carMaxVelocity + 1;
+                            maxVelocity = probability.nextInt(Settings.carMaxUpperVelocity - Settings.carMaxVelocity ) + Settings.carMaxVelocity + 1;
                         }
 
                         Car toAdd = new Car(maxVelocity, probability.nextInt(maxVelocity - 2) + 2, probability.nextInt(6) + 1);

@@ -64,7 +64,7 @@ public class Simulation {
             if (randomNumber == 0) {
                 maxVelocity = settings.getCarMaxVelocity();
             } else {
-                maxVelocity = rand.nextInt(settings.getCarMaxUpperVelocity() - settings.getCarMaxVelocity() - 1) + settings.getCarMaxVelocity() + 1;
+                maxVelocity = rand.nextInt(settings.getCarMaxUpperVelocity() - settings.getCarMaxVelocity()) + settings.getCarMaxVelocity() + 1;
             }
             highway.roads[randomRoads].road[randomRoad + 1].lane.get(randomLane).vehicle = new Car(maxVelocity, rand.nextInt(maxVelocity - 2) + 2, rand.nextInt(6) + 1);
             highway.roads[randomRoads].road[randomRoad + 1].lane.get(randomLane).occupied = true;
