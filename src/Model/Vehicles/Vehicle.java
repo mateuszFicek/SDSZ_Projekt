@@ -184,7 +184,7 @@ public class Vehicle {
         hasChangedLane = false;
         if (distanceToNextCarInFront <= velocity || (probability > 0.9 && velocity == maxVelocity)) {
             SlowDown();
-        } else if (probability < 0.3) {
+        } else if ((probability < 0.3 || velocity <= maxVelocity - 2) && velocity+1 != distanceToNextCarInFront) {
             SpeedUp();
         }
     }
