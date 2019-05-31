@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle {
-    private final int width = 7;
-    private final int height = 7;
+    private final int width = 9;
+    private final int height = 9;
     private final int x;
     private final int y;
     private Color color;
