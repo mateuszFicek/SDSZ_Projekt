@@ -29,7 +29,7 @@ public class Road {
         }
 
 
-        road[0].enterCars();
+        road[2].enterCars();
 
 
         for (int index = 0; index < road.length; index++) {

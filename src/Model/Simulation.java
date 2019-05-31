@@ -66,8 +66,8 @@ public class Simulation {
             } else {
                 maxVelocity = rand.nextInt(settings.getCarMaxUpperVelocity() - settings.getCarMaxVelocity()) + settings.getCarMaxVelocity() + 1;
             }
-            highway.roads[randomRoads].road[randomRoad + 1].lane.get(randomLane).vehicle = new Car(maxVelocity, rand.nextInt(maxVelocity - 2) + 2, rand.nextInt(6) + 1);
-            highway.roads[randomRoads].road[randomRoad + 1].lane.get(randomLane).occupied = true;
+            highway.roads[randomRoads].road[randomRoad].lane.get(randomLane).vehicle = new Car(maxVelocity, rand.nextInt(maxVelocity - 2) + 2, rand.nextInt(6) + 1);
+            highway.roads[randomRoads].road[randomRoad].lane.get(randomLane).occupied = true;
         }
         for (int i = 0; i < highway.roads.length; ++i) {
             for (int j = 0; j < highway.roads[i].road.length; ++j) {
