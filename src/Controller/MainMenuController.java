@@ -63,6 +63,5 @@ public class MainMenuController extends BaseController implements Initializable 
 
     protected void initSettings(Settings settings) {
         this.settings = settings;
-        System.out.println(settings.getTime());
     }
 }

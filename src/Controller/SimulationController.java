@@ -51,7 +51,6 @@ public class SimulationController extends BaseController implements Initializabl
     @Override
     protected void initSettings(Settings settings) {
         this.settings = settings;
-        System.out.println(this.settings);
     }
 
     void initSimulation() {

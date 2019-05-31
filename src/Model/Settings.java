@@ -8,14 +8,12 @@ public class Settings {
     public String[] times = new String[]{"Noc", "Poranek", "Popołudnie"};
     private int time;
     public static int carMaxVelocity;
-    public static int tirMaxVelocity;
     public static int[] throughput = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 
     public Settings() {
         time = 2;
         carMaxVelocity = 3;
         carMaxUpperVelocity = 5;
-        tirMaxVelocity = 3;
     }
 
     public int getTime() {
@@ -32,14 +30,6 @@ public class Settings {
 
     public void setCarMaxVelocity(int carMaxVelocity) {
         Settings.carMaxVelocity = carMaxVelocity;
-    }
-
-    public int getTirMaxVelocity() {
-        return tirMaxVelocity;
-    }
-
-    public void setTirMaxVelocity(int tirMaxVelocity) {
-        Settings.tirMaxVelocity = tirMaxVelocity;
     }
 
     public int[] getThroughput() {

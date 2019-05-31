@@ -11,7 +11,7 @@ public class Road {
     public int[] roadThroughput;
     private Random probability = new Random();
 
-    public Road(int roadWidth) {
+    Road(int roadWidth) {
         road = new Lane[roadWidth];
         for (int i = 0; i < roadWidth; i++) road[i] = new Lane();
     }

@@ -8,37 +8,15 @@ import java.util.Random;
 
 public class Simulation {
 
-    Random rand = new Random();
+    private Random rand = new Random();
     private Highway highway;
     private int startingNumberOfCars;
 
-    public Simulation() {
-        highway = new Highway(2);
-        highway.setupHighway();
-
-
-//       CODE FOR TESTING
-        Vehicle car = new Car();
-        car.increaseVelocity(5);
-        Vehicle car2 = new Car();
-        Vehicle car3 = new Car();
-        car.increaseVelocity(0);
-        highway.roads[0].road[1].lane.get(50).vehicle = car;
-        highway.roads[0].road[1].lane.get(50).occupied = true;
-        highway.roads[0].road[1].lane.get(51).vehicle = car2;
-        highway.roads[0].road[1].lane.get(51).occupied = true;
-        highway.roads[0].road[1].lane.get(52).vehicle = car3;
-        highway.roads[0].road[1].lane.get(52).occupied = true;
-        highway.roads[0].moveCarsNeighbourhoods(1);
-    }
 
     public Simulation(Settings settings) {
         highway = new Highway(2);
         highway.setupHighway();
-        highway.roads[0].roadThroughput = settings.getThroughput().clone();
-        highway.roads[1].roadThroughput = settings.getThroughput().clone();
-        highway.roads[0].road[0].optionsThroughput = settings.getThroughput();
-        highway.roads[1].road[0].optionsThroughput = settings.getThroughput();
+
         int numberOfCars = 4000;
         int maxVelocity;
         switch (settings.getTime()) {

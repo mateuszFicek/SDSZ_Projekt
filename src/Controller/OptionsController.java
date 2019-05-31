@@ -29,10 +29,9 @@ public class OptionsController extends BaseController implements Initializable {
     @Override
     protected void initSettings(Settings settings) {
         this.settings = settings;
-        System.out.println(this.settings);
     }
 
-    protected void initTime() {
+    void initTime() {
         timeBox.setItems(FXCollections.observableArrayList("Noc", "Poranek", "Popołudnie"));
         timeBox.setValue(settings.times[settings.getTime()]);
     }
@@ -45,7 +44,7 @@ public class OptionsController extends BaseController implements Initializable {
         });
     }
 
-    public void initSpinners() {
+    void initSpinners() {
         tirMaxVelocity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 3, settings.getCarMaxVelocity()));
         carMaxVelocity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 7, settings.getCarMaxUpperVelocity()));
     }
