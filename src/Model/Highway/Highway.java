@@ -50,8 +50,9 @@ public class Highway {
 
     public void setupSegmentsStarts() {
         for (int i = 1; i < segmentsLen.size(); ++i) {
-            startOfSegments.add(startOfSegments.get(i - 1) + segmentsLen.get(i));
+            startOfSegments.set(i, startOfSegments.get(i - 1) + segmentsLen.get(i-1));
         }
+        System.out.print(startOfSegments);
     }
 
     public static void resetNumbersOfCarOnSegments() {
