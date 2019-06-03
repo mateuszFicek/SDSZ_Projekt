@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 public class SimulationController extends BaseController implements Initializable {
     public Button backButton;
 
-    public Label simLabel;
     public Button magicStartButton;
 
     public Simulation simulation;
@@ -44,7 +43,6 @@ public class SimulationController extends BaseController implements Initializabl
 
                 }
                 updateLabelsText();
-                Highway.printCarsBySegment();
             }
             i += 1;
         }
@@ -53,10 +51,13 @@ public class SimulationController extends BaseController implements Initializabl
     @Override
     protected void initSettings(Settings settings) {
         this.settings = settings;
-        System.out.println(this.settings);
     }
 
-    protected void initSimulation() {
+    void resetSettings(){
+        Settings.throughput = new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+    }
+
+    void initSimulation() {
         this.simulation = new Simulation(settings);
     }
 

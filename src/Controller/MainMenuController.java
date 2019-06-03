@@ -29,6 +29,7 @@ public class MainMenuController extends BaseController implements Initializable 
 
         SimulationController simulationController = loader.getController();
         simulationController.initSettings(super.settings);
+        simulationController.resetSettings();
         simulationController.initSimulation();
 
         window.show();
@@ -48,12 +49,13 @@ public class MainMenuController extends BaseController implements Initializable 
         OptionsController optionsController = loader.getController();
         optionsController.initSettings(super.settings);
         optionsController.initTime();
+        optionsController.initSpinners();
         window.show();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (!Settings.initialized){
+        if (!Settings.initialized) {
             settings = new Settings();
             Settings.initialized = true;
         }
@@ -62,6 +64,5 @@ public class MainMenuController extends BaseController implements Initializable 
 
     protected void initSettings(Settings settings) {
         this.settings = settings;
-        System.out.println(settings.getTime());
     }
 }

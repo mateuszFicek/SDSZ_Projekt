@@ -1,12 +1,12 @@
 package Controller;
 
+import Model.Settings;
 import Model.Simulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Tooltip;
@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ConfigurationController extends BaseController{
+public class ConfigurationController extends BaseController {
 
     public Spinner<Integer> entranceThroughtput1;
     public Spinner<Integer> entranceThroughtput2;
@@ -38,7 +38,6 @@ public class ConfigurationController extends BaseController{
     public Spinner<Integer> entranceThroughtput17;
     private Simulation simulation;
 
-    private int[] throughput = new int[17];
     @FXML
     private List<Spinner<Integer>> spinnerList;
 
@@ -49,8 +48,7 @@ public class ConfigurationController extends BaseController{
 
     public void goBackToSimulation(ActionEvent event) throws IOException {
 
-        getThroughputValues();
-        settings.setThroughput(throughput);
+        setThroughputValues();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Simulation.fxml"));
 
@@ -68,9 +66,9 @@ public class ConfigurationController extends BaseController{
         window.show();
     }
 
-    private void getThroughputValues() {
+    private void setThroughputValues() {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            throughput[i] = spinnerList.get(i).getValue();
+            Settings.throughput[i] = spinnerList.get(i).getValue();
         }
     }
 
@@ -80,7 +78,7 @@ public class ConfigurationController extends BaseController{
 
     public void initializeSpinners() {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            spinnerList.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, settings.getThroughput()[i]));
+            spinnerList.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 60, settings.getThroughput()[i]));
             spinnerList.get(i).setTooltip(new Tooltip("Ilość samochodów na minutę"));
         }
     }

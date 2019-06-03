@@ -28,6 +28,7 @@ public abstract class BaseController implements Initializable {
         mainMenuController.initSettings(settings);
         window.show();
     }
+
     protected void initSettings(Settings settings) {
         this.settings = settings;
     }

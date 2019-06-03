@@ -1,41 +1,40 @@
 package Model.Highway;
 
 //Jezdnia sklada sie z 3 pasow
-//
 
-import Model.Vehicles.LaneToChange;
 import Model.Vehicles.Vehicle;
-import Model.Vehicles.Car;
 
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Random;
 
 public class Road {
     public Lane[] road;
-    int numberOfCarsOnLane;
-    final int cellNumber = 8353;
-    int laneNumber;
+    public int[] roadThroughput;
+    private Random probability = new Random();
 
-    public Road(int roadWidth) {
+    Road(int roadWidth) {
         road = new Lane[roadWidth];
         for (int i = 0; i < roadWidth; i++) road[i] = new Lane();
     }
 
     public void generateNextFrame() {
         int suma = 0;
+
         for (int index = 0; index < road.length; index++) {
             road[index].calculateNextFrame(index);
         }
+
         for (int index = 0; index < road.length; index++) {
-            int l = road[index].moveVehiclesForward(index);
+            int l = road[index].moveVehiclesForward();
             suma += l;
         }
+
+
+        road[2].enterCars();
+
+
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
         }
-        System.out.println("SUMA NA WSZYSTKICH: " + suma);
-        System.out.println("--------------------------------------------------------------");
     }
 
     public void moveCarsNeighbourhoods(int laneIndex) {
