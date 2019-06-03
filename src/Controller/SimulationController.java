@@ -53,6 +53,10 @@ public class SimulationController extends BaseController implements Initializabl
         this.settings = settings;
     }
 
+    void resetSettings(){
+        Settings.throughput = new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+    }
+
     void initSimulation() {
         this.simulation = new Simulation(settings);
     }

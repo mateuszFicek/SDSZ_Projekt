@@ -29,6 +29,7 @@ public class MainMenuController extends BaseController implements Initializable 
 
         SimulationController simulationController = loader.getController();
         simulationController.initSettings(super.settings);
+        simulationController.resetSettings();
         simulationController.initSimulation();
 
         window.show();
