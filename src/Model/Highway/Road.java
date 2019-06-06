@@ -4,11 +4,12 @@ package Model.Highway;
 
 import Model.Vehicles.Vehicle;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Road {
     public Lane[] road;
-    public int[] roadThroughput;
+    public int[] carsPerIteration =new int[17];
     private Random probability = new Random();
 
     Road(int roadWidth) {
@@ -17,6 +18,7 @@ public class Road {
     }
 
     public void generateNextFrame() {
+        Arrays.fill(carsPerIteration,0);
         int suma = 0;
 
         for (int index = 0; index < road.length; index++) {
@@ -26,14 +28,21 @@ public class Road {
         for (int index = 0; index < road.length; index++) {
             int l = road[index].moveVehiclesForward();
             suma += l;
+
+            if(index<2)
+                for(int j=0; j< carsPerIteration.length; j++)
+                {
+                    carsPerIteration[j]+= road[index].carsPerIteration[j];
+                }
         }
 
 
         road[2].enterCars();
-
+        System.out.println("Flow of cars on segment 0: " + carsPerIteration[0]);
 
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
+            Arrays.fill(road[index].carsPerIteration,0);
         }
     }
 
