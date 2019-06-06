@@ -9,8 +9,9 @@ import java.util.Random;
 
 public class Road {
     public Lane[] road;
-    public int[] carsPerIteration =new int[17];
+    public int[] carsPerMinute =new int[17];
     private Random probability = new Random();
+    int iterCounter = 0;
 
     Road(int roadWidth) {
         road = new Lane[roadWidth];
@@ -18,7 +19,11 @@ public class Road {
     }
 
     public void generateNextFrame() {
-        Arrays.fill(carsPerIteration,0);
+        if(iterCounter == 60) {
+            System.out.println("Flow of cars on segment 0: " + carsPerMinute[0]);
+            iterCounter=0;
+            Arrays.fill(carsPerMinute, 0);
+        }
         int suma = 0;
 
         for (int index = 0; index < road.length; index++) {
@@ -30,20 +35,20 @@ public class Road {
             suma += l;
 
             if(index<2)
-                for(int j=0; j< carsPerIteration.length; j++)
+                for(int j=0; j< carsPerMinute.length; j++)
                 {
-                    carsPerIteration[j]+= road[index].carsPerIteration[j];
+                    carsPerMinute[j]+= road[index].carsPerIteration[j];
                 }
         }
 
 
         road[2].enterCars();
-        System.out.println("Flow of cars on segment 0: " + carsPerIteration[0]);
 
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
             Arrays.fill(road[index].carsPerIteration,0);
         }
+        iterCounter++;
     }
 
     public void moveCarsNeighbourhoods(int laneIndex) {
