@@ -62,7 +62,7 @@ public class Road {
 
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
-            //Arrays.fill(road[index].carsPerIteration,0);
+            Arrays.fill(road[index].carsPerIteration,0);
         }
         iterCounter++;
     }
