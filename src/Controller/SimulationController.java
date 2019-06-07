@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Highway.Highway;
+import Model.Highway.Lane;
 import Model.Highway.Road;
 import Model.Settings;
 import Model.Simulation;
@@ -40,8 +41,8 @@ public class SimulationController extends BaseController implements Initializabl
                 Highway.resetNumbersOfCarOnSegments();
                 for (Road r : simulation.getHighway().roads) {
                     r.generateNextFrame();
-
                 }
+                Lane.iterCounter++;
                 updateLabelsText();
             }
             i += 1;
@@ -53,7 +54,7 @@ public class SimulationController extends BaseController implements Initializabl
         this.settings = settings;
     }
 
-    void resetSettings(){
+    void resetSettings() {
         Settings.throughput = new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
     }
 
@@ -78,8 +79,9 @@ public class SimulationController extends BaseController implements Initializabl
     }
 
     private void updateLabelsText() {
-        for (int i = 0; i < labelList.size(); ++i) {
+        for (int i = 0; i < labelList.size() / 2; ++i) {
             labelList.get(i).setText(String.valueOf(Highway.carsOnSegment.get(i)));
+            labelList.get(i + labelList.size() / 2).setText(String.valueOf(Road.carsPerMinute[i]));
         }
     }
 

@@ -6,7 +6,6 @@ import Model.Vehicles.Car;
 import Model.Vehicles.Vehicle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -15,11 +14,13 @@ import java.util.stream.IntStream;
 //Pas sklada sie z 8353 kratek
 
 public class Lane {
+    public static int iterCounter = 0;
+
     private int numberOfCarsOnLane;
     public CircularArrayList<Cell> lane;
     private int entryCounter = 0;
     private final int cellNumber = 8353;
-    public int[] carsPerIteration = new int[17];
+    public int[][] carsFlow = new int[17][60];
 
 
     private List<Integer> BaliceWjazd = IntStream.rangeClosed(0, 40).boxed().collect(Collectors.toList());
@@ -171,23 +172,25 @@ public class Lane {
         int checkPoint;
         CircularArrayList<Cell> nextFrameLane = new CircularArrayList<>(cellNumber);
         for (int i = 0; i < cellNumber; i++) nextFrameLane.add(new Cell(lane.get(i).cellType));
+        for (int i = 0; i < 17; ++i) {
+            carsFlow[i][iterCounter % 60] = 0;
+        }
 
         for (int i = 0; i < lane.size(); i++) {
             if (lane.get(i).occupied) {
                 numberOfCarsOnLane += 1;
                 segment = Highway.segmentsByCell.get(i);
 
-                if(segment == 0)
-                    previousSegment=0;
+                if (segment == 0)
+                    previousSegment = 0;
                 else
-                    previousSegment = segment-1;
+                    previousSegment = segment - 1;
 
-                checkPoint = Highway.segmentsLen.get(segment)-Highway.segmentsLen.get(previousSegment) /2;
+                checkPoint = Highway.startOfSegments.get(segment) + Highway.segmentsLen.get(segment) / 2;
                 Highway.carsOnSegment.set(segment, (Highway.carsOnSegment.get(segment) + 1));
                 Vehicle currentCellVehicle = lane.get(i).vehicle;
-                if(currentCellVehicle.getVelocity() + i > checkPoint && i <=checkPoint)
-                {
-                    carsPerIteration[segment] +=1;
+                if (currentCellVehicle.getVelocity() + i > checkPoint && i <= checkPoint) {
+                    carsFlow[segment][iterCounter % 60] += 1;
                 }
 
                 if (currentCellVehicle.getVelocity() + i >= lane.size()) {

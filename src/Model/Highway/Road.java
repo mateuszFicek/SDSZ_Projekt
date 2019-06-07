@@ -4,28 +4,33 @@ package Model.Highway;
 
 import Model.Vehicles.Vehicle;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Road {
     public Lane[] road;
-    public int[][] carsPerMinute = new int[17][60];
+    public static int[] carsPerMinute = new int[17];
     private Random probability = new Random();
     int iterCounter = 0;
 
     Road(int roadWidth) {
         road = new Lane[roadWidth];
         for (int i = 0; i < roadWidth; i++) road[i] = new Lane();
-        for (int i = 0; i<17;i++){
-            for(int j = 0;j<60;j++){
-                carsPerMinute[i][j] = 0;
-            }
+        for (int i = 0; i < 17; i++) {
+
+            carsPerMinute[i] = 0;
+
         }
     }
 
     public void generateNextFrame() {
         int suma = 0;
+
+        for (int j = 0; j < 17; j++) {
+            carsPerMinute[j] = 0;
+
+        }
 
         for (int index = 0; index < road.length; index++) {
             road[index].calculateNextFrame(index);
@@ -35,36 +40,20 @@ public class Road {
             int l = road[index].moveVehiclesForward();
             suma += l;
 
-            if(index<2) {
+
+            if (index < 2) {
                 for (int j = 0; j < 17; j++) {
-                    carsPerMinute[j][0] += road[index].carsPerIteration[j];
-                    if (iterCounter == 10) {
-                        road[index].carsPerIteration[j] = 0;
-                        System.out.println("Flow of cars on segment 0: " + carsPerMinute[0][0]);
-                        iterCounter = 0;
-                        //Arrays.fill(carsPerMinute, 0);
-                        for (int i = 59; i >= 0; i--) {
-                            if (i == 0) {
-                                carsPerMinute[j][0] = 0;
-                                System.out.println("s: " + i + "cars: " + carsPerMinute[j][i]);
-                            } else {
-                                carsPerMinute[j][i] = carsPerMinute[j][i - 1];
-                                System.out.println("s: " + i + "cars: " + carsPerMinute[j][i]);
-                            }
-                        }
-                    }
+                    carsPerMinute[j] += IntStream.of(road[index].carsFlow[j]).sum();
+
                 }
             }
         }
-
 
         road[2].enterCars();
 
         for (int index = 0; index < road.length; index++) {
             moveCarsNeighbourhoods(index);
-            Arrays.fill(road[index].carsPerIteration,0);
         }
-        iterCounter++;
     }
 
     public void moveCarsNeighbourhoods(int laneIndex) {
