@@ -9,144 +9,269 @@
 <?import javafx.scene.text.Font?>
 
 <?import java.util.ArrayList?>
-<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SimulationController">
-   <children>
-      <AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;">
-         <children>
-            <Button fx:id="backButton" layoutX="14.0" layoutY="706.0" mnemonicParsing="false" onAction="#goBackToMenu" prefHeight="48.0" prefWidth="95.0" text="Wyjście" />
-            <Button fx:id="magicStartButton" layoutX="1002.0" layoutY="730.0" mnemonicParsing="false" onAction="#startSimulation" opacity="0.0" prefHeight="0.0" prefWidth="0.0" />
-            <ImageView fitHeight="632.0" fitWidth="959.0" layoutX="33.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@IVObw_Sym.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="seg1" layoutX="166.0" layoutY="235.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg2" layoutX="141.0" layoutY="176.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg3" layoutX="262.0" layoutY="136.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg4" layoutX="346.0" layoutY="106.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg5" layoutX="479.0" layoutY="146.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg6" layoutX="656.0" layoutY="146.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg7" layoutX="731.0" layoutY="196.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg8" layoutX="764.0" layoutY="263.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg9" layoutX="846.0" layoutY="349.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg10" layoutX="813.0" layoutY="440.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg11" layoutX="748.0" layoutY="490.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg12" layoutX="656.0" layoutY="502.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg13" layoutX="463.0" layoutY="522.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg14" layoutX="363.0" layoutY="554.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg15" layoutX="199.0" layoutY="522.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg16" layoutX="199.0" layoutY="431.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="seg17" layoutX="183.0" layoutY="329.0">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <fx:define>
-               <ArrayList fx:id="labelList">
-                  <fx:reference source="seg1" />
-                  <fx:reference source="seg2" />
-                  <fx:reference source="seg3" />
-                  <fx:reference source="seg4" />
-                  <fx:reference source="seg5" />
-                  <fx:reference source="seg6" />
-                  <fx:reference source="seg7" />
-                  <fx:reference source="seg8" />
-                  <fx:reference source="seg9" />
-                  <fx:reference source="seg10" />
-                  <fx:reference source="seg11" />
-                  <fx:reference source="seg12" />
-                  <fx:reference source="seg13" />
-                  <fx:reference source="seg14" />
-                  <fx:reference source="seg15" />
-                  <fx:reference source="seg16" />
-                  <fx:reference source="seg17" />
+<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controller.SimulationController">
+    <children>
+        <AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;">
+            <children>
+                <Button fx:id="backButton" layoutX="14.0" layoutY="706.0" mnemonicParsing="false"
+                        onAction="#goBackToMenu" prefHeight="48.0" prefWidth="95.0" text="Wyjście"/>
+                <Button fx:id="magicStartButton" layoutX="1002.0" layoutY="730.0" mnemonicParsing="false"
+                        onAction="#startSimulation" opacity="0.0" prefHeight="0.0" prefWidth="0.0"/>
+                <ImageView fitHeight="632.0" fitWidth="959.0" layoutX="33.0" layoutY="75.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@IVObw_Sym.png"/>
+                    </image>
+                </ImageView>
+                <Label fx:id="seg1" layoutX="166.0" layoutY="235.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg2" layoutX="141.0" layoutY="176.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg3" layoutX="262.0" layoutY="136.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg4" layoutX="346.0" layoutY="106.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg5" layoutX="479.0" layoutY="146.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg6" layoutX="656.0" layoutY="146.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg7" layoutX="731.0" layoutY="196.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg8" layoutX="764.0" layoutY="263.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg9" layoutX="846.0" layoutY="349.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg10" layoutX="813.0" layoutY="440.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg11" layoutX="748.0" layoutY="490.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg12" layoutX="656.0" layoutY="502.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg13" layoutX="463.0" layoutY="522.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg14" layoutX="363.0" layoutY="554.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg15" layoutX="199.0" layoutY="522.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg16" layoutX="199.0" layoutY="431.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg17" layoutX="183.0" layoutY="329.0">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg2a" layoutX="90.0" layoutY="176.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg3a" layoutX="210.0" layoutY="101.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg4a" layoutX="356.0" layoutY="61.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg5a" layoutX="486.0" layoutY="69.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg6a" layoutX="656.0" layoutY="94.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg7a" layoutX="796.0" layoutY="176.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg8a" layoutX="813.0" layoutY="258.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg9a" layoutX="749.0" layoutY="349.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg10a" layoutX="743.0" layoutY="437.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg11a" layoutX="796.0" layoutY="515.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg12a" layoutX="634.0" layoutY="558.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg13a" layoutX="500.0" layoutY="558.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg14a" layoutX="311.0" layoutY="554.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg15a" layoutX="277.0" layoutY="515.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg16a" layoutX="151.0" layoutY="443.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg17a" layoutX="116.0" layoutY="338.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="seg1a" layoutX="113.0" layoutY="235.0" text="Label" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <fx:define>
+                    <ArrayList fx:id="labelList">
+                        <fx:reference source="seg1"/>
+                        <fx:reference source="seg2"/>
+                        <fx:reference source="seg3"/>
+                        <fx:reference source="seg4"/>
+                        <fx:reference source="seg5"/>
+                        <fx:reference source="seg6"/>
+                        <fx:reference source="seg7"/>
+                        <fx:reference source="seg8"/>
+                        <fx:reference source="seg9"/>
+                        <fx:reference source="seg10"/>
+                        <fx:reference source="seg11"/>
+                        <fx:reference source="seg12"/>
+                        <fx:reference source="seg13"/>
+                        <fx:reference source="seg14"/>
+                        <fx:reference source="seg15"/>
+                        <fx:reference source="seg16"/>
+                        <fx:reference source="seg17"/>
+                        <fx:reference source="seg1a"/>
+                        <fx:reference source="seg2a"/>
+                        <fx:reference source="seg3a"/>
+                        <fx:reference source="seg4a"/>
+                        <fx:reference source="seg5a"/>
+                        <fx:reference source="seg6a"/>
+                        <fx:reference source="seg7a"/>
+                        <fx:reference source="seg8a"/>
+                        <fx:reference source="seg9a"/>
+                        <fx:reference source="seg10a"/>
+                        <fx:reference source="seg11a"/>
+                        <fx:reference source="seg12a"/>
+                        <fx:reference source="seg13a"/>
+                        <fx:reference source="seg14a"/>
+                        <fx:reference source="seg15a"/>
+                        <fx:reference source="seg16a"/>
+                        <fx:reference source="seg17a"/>
 
-      
-               </ArrayList>
-            </fx:define>
-            <Button fx:id="simSeg1" layoutX="141.0" layoutY="238.0" mnemonicParsing="false" onAction="#simulateSegment1" opacity="0.0" prefHeight="33.0" prefWidth="38.0" />
-            <Button fx:id="simSeg2" layoutX="144.0" layoutY="169.0" mnemonicParsing="false" onAction="#simulateSegment2" opacity="0.0" prefHeight="67.0" prefWidth="103.0" />
-            <Button layoutX="210.0" layoutY="101.0" mnemonicParsing="false" onAction="#simulateSegment3" opacity="0.0" prefHeight="67.0" prefWidth="103.0" text="Button" />
-            <Button layoutX="312.0" layoutY="89.0" mnemonicParsing="false" onAction="#simulateSegment4" opacity="0.0" prefHeight="48.0" prefWidth="123.0" text="Button" />
-            <Button layoutX="437.0" layoutY="114.0" mnemonicParsing="false" onAction="#simulateSegment5" opacity="0.0" prefHeight="33.0" prefWidth="149.0" text="Button" />
-            <Button layoutX="586.0" layoutY="114.0" mnemonicParsing="false" onAction="#simulateSegment6" opacity="0.0" prefHeight="67.0" prefWidth="116.0" text="Button" />
-            <Button layoutX="706.0" layoutY="176.0" mnemonicParsing="false" onAction="#simulateSegment7" opacity="0.0" prefHeight="40.0" prefWidth="85.0" rotate="45.0" text="Button" />
-            <Button layoutX="770.0" layoutY="235.0" mnemonicParsing="false" onAction="#simulateSegment8" opacity="0.0" prefHeight="79.0" prefWidth="61.0" text="Button" />
-            <Button layoutX="802.0" layoutY="316.0" mnemonicParsing="false" onAction="#simulateSegment9" opacity="0.0" prefHeight="88.0" prefWidth="46.0" text="Button" />
-            <Button layoutX="778.0" layoutY="406.0" mnemonicParsing="false" onAction="#simulateSegment10" opacity="0.0" prefHeight="101.0" prefWidth="38.0" text="Button" />
-            <Button layoutX="718.0" layoutY="510.0" mnemonicParsing="false" onAction="#simulateSegment11" opacity="0.0" prefHeight="40.0" prefWidth="95.0" text="Button" />
-            <Button layoutX="500.0" layoutY="535.0" mnemonicParsing="false" onAction="#simulateSegment12" opacity="0.0" prefHeight="40.0" prefWidth="217.0" text="Button" />
-            <Button layoutX="439.0" layoutY="550.0" mnemonicParsing="false" onAction="#simulateSegment13" opacity="0.0" prefHeight="40.0" prefWidth="61.0" text="Button" />
-            <Button layoutX="273.0" layoutY="578.0" mnemonicParsing="false" onAction="#simulateSegment14" opacity="0.0" prefHeight="40.0" prefWidth="165.0" text="Button" />
-            <Button layoutX="211.0" layoutY="487.0" mnemonicParsing="false" onAction="#simulateSegment15" opacity="0.0" prefHeight="88.0" prefWidth="88.0" text="Button" />
-            <Button layoutX="172.0" layoutY="439.0" mnemonicParsing="false" onAction="#simulateSegment16" opacity="0.0" prefHeight="48.0" prefWidth="46.0" text="Button" />
-            <Button layoutX="148.0" layoutY="278.0" mnemonicParsing="false" onAction="#simulateSegment17" opacity="0.0" prefHeight="160.0" prefWidth="38.0" text="Button" />
-            <Button fx:id="configurationButton" layoutX="132.0" layoutY="706.0" mnemonicParsing="false" onAction="#changeSceneToConfiguration" prefHeight="48.0" prefWidth="95.0" text="Konfiguracja" />
-         </children>
-      </AnchorPane>
-   </children>
+
+                    </ArrayList>
+                </fx:define>
+                <Button fx:id="simSeg1" layoutX="141.0" layoutY="238.0" mnemonicParsing="false"
+                        onAction="#simulateSegment1" opacity="0.0" prefHeight="33.0" prefWidth="38.0"/>
+                <Button fx:id="simSeg2" layoutX="144.0" layoutY="169.0" mnemonicParsing="false"
+                        onAction="#simulateSegment2" opacity="0.0" prefHeight="67.0" prefWidth="103.0"/>
+                <Button layoutX="210.0" layoutY="101.0" mnemonicParsing="false" onAction="#simulateSegment3"
+                        opacity="0.0" prefHeight="67.0" prefWidth="103.0" text="Button"/>
+                <Button layoutX="312.0" layoutY="89.0" mnemonicParsing="false" onAction="#simulateSegment4"
+                        opacity="0.0" prefHeight="48.0" prefWidth="123.0" text="Button"/>
+                <Button layoutX="437.0" layoutY="114.0" mnemonicParsing="false" onAction="#simulateSegment5"
+                        opacity="0.0" prefHeight="33.0" prefWidth="149.0" text="Button"/>
+                <Button layoutX="586.0" layoutY="114.0" mnemonicParsing="false" onAction="#simulateSegment6"
+                        opacity="0.0" prefHeight="67.0" prefWidth="116.0" text="Button"/>
+                <Button layoutX="706.0" layoutY="176.0" mnemonicParsing="false" onAction="#simulateSegment7"
+                        opacity="0.0" prefHeight="40.0" prefWidth="85.0" rotate="45.0" text="Button"/>
+                <Button layoutX="770.0" layoutY="235.0" mnemonicParsing="false" onAction="#simulateSegment8"
+                        opacity="0.0" prefHeight="79.0" prefWidth="61.0" text="Button"/>
+                <Button layoutX="802.0" layoutY="316.0" mnemonicParsing="false" onAction="#simulateSegment9"
+                        opacity="0.0" prefHeight="88.0" prefWidth="46.0" text="Button"/>
+                <Button layoutX="778.0" layoutY="406.0" mnemonicParsing="false" onAction="#simulateSegment10"
+                        opacity="0.0" prefHeight="101.0" prefWidth="38.0" text="Button"/>
+                <Button layoutX="718.0" layoutY="510.0" mnemonicParsing="false" onAction="#simulateSegment11"
+                        opacity="0.0" prefHeight="40.0" prefWidth="95.0" text="Button"/>
+                <Button layoutX="500.0" layoutY="535.0" mnemonicParsing="false" onAction="#simulateSegment12"
+                        opacity="0.0" prefHeight="40.0" prefWidth="217.0" text="Button"/>
+                <Button layoutX="439.0" layoutY="550.0" mnemonicParsing="false" onAction="#simulateSegment13"
+                        opacity="0.0" prefHeight="40.0" prefWidth="61.0" text="Button"/>
+                <Button layoutX="273.0" layoutY="578.0" mnemonicParsing="false" onAction="#simulateSegment14"
+                        opacity="0.0" prefHeight="40.0" prefWidth="165.0" text="Button"/>
+                <Button layoutX="211.0" layoutY="487.0" mnemonicParsing="false" onAction="#simulateSegment15"
+                        opacity="0.0" prefHeight="88.0" prefWidth="88.0" text="Button"/>
+                <Button layoutX="172.0" layoutY="439.0" mnemonicParsing="false" onAction="#simulateSegment16"
+                        opacity="0.0" prefHeight="48.0" prefWidth="46.0" text="Button"/>
+                <Button layoutX="148.0" layoutY="278.0" mnemonicParsing="false" onAction="#simulateSegment17"
+                        opacity="0.0" prefHeight="160.0" prefWidth="38.0" text="Button"/>
+                <Button fx:id="configurationButton" layoutX="132.0" layoutY="706.0" mnemonicParsing="false"
+                        onAction="#changeSceneToConfiguration" prefHeight="48.0" prefWidth="95.0" text="Konfiguracja"/>
+
+            </children>
+        </AnchorPane>
+    </children>
 </VBox>
