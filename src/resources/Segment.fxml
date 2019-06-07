@@ -9,28 +9,28 @@
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SegmentController">
     <children>
         <Button fx:id="backButton" layoutX="14.0" layoutY="706.0" mnemonicParsing="false" onAction="#goBackToSimulation" prefHeight="48.0" prefWidth="95.0" text="Powrót" />
-      <ScrollPane fx:id="scrollPane" layoutX="8.0" layoutY="369.0" prefHeight="67.0" prefWidth="1001.0" style="-fx-background-color: rgb(255,255,255);" />
+      <ScrollPane fx:id="scrollPane" layoutX="12.0" layoutY="416.0" prefHeight="67.0" prefWidth="1001.0" style="-fx-background-color: rgb(255,255,255);" />
       <Label fx:id="segmentLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="56.0" prefWidth="994.0" text="Label" textAlignment="CENTER">
          <font>
             <Font name="Arial" size="72.0" />
          </font>
       </Label>
-      <Label fx:id="carId" alignment="CENTER" contentDisplay="CENTER" layoutX="868.0" layoutY="104.0" prefHeight="42.0" prefWidth="79.0" textAlignment="CENTER">
+      <Label fx:id="carId" alignment="CENTER" contentDisplay="CENTER" layoutX="858.0" layoutY="104.0" prefHeight="42.0" prefWidth="79.0" textAlignment="CENTER">
          <font>
             <Font name="Arial" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="carSpeed" alignment="CENTER" layoutX="365.0" layoutY="125.0" prefHeight="42.0" prefWidth="409.0">
+      <Label fx:id="carSpeed" alignment="CENTER" layoutX="365.0" layoutY="126.0" prefHeight="42.0" prefWidth="409.0">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="carDistanceToNext" alignment="CENTER" layoutX="365.0" layoutY="228.0" prefHeight="42.0" prefWidth="409.0">
+      <Label fx:id="carDistanceToNext" alignment="CENTER" layoutX="365.0" layoutY="251.0" prefHeight="42.0" prefWidth="409.0">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="carExitsRemaining" alignment="CENTER" layoutX="365.0" layoutY="295.0" prefHeight="42.0" prefWidth="409.0">
+      <Label fx:id="carExitsRemaining" alignment="CENTER" layoutX="365.0" layoutY="209.0" prefHeight="42.0" prefWidth="409.0">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -40,6 +40,6 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="scrollPane2" layoutX="12.0" layoutY="291.0" prefHeight="67.0" prefWidth="1001.0" style="-fx-background-color: rgb(255,255,255);" />
+      <ScrollPane fx:id="scrollPane2" layoutX="12.0" layoutY="338.0" prefHeight="67.0" prefWidth="1001.0" style="-fx-background-color: rgb(255,255,255);" />
     </children>
 </AnchorPane>
